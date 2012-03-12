@@ -1,0 +1,10 @@
+* So far it works with QEMU. But it is easy to use two serial ports
+  to have the sniffer in the middle.
+
+I used this one with QEMU and the following options:
+
+  -serial udp:127.0.0.1:2000@127.0.0.1:2001
+
+
+I continued the development with other name, it's "NITM".
+See it in ../../../nitm .

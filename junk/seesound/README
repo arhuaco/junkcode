@@ -1,0 +1,53 @@
+I liked the idea of being able to see a little
+with sound, and I wanted to test the
+concept in a _very_ simple game. In the future
+I would like to try something like tetris.
+
+http://www.seeingwithsound.com/javoice.htm
+
+I found useful source code here.
+http://www.seeingwithsound.com/im2sound.htm#artificial_scenes
+
+I wrapped what I needed in a Python module.
+src/seesound.cpp
+
+COMPILATION
+
+In debian, you will need the following packages:
+
+  python-dev
+  swig
+  python-pygame
+  (please let me know if I forgot one)
+
+cd src
+make
+
+If you don't have the command "python2.4-config --cflags", you will have
+to replace the relevant part in the Makefile using:
+
+-I/usr/include/python2.4 -I/usr/include/python2.4 -fno-strict-aliasing -DNDEBUG -g -O2 -Wall -Wstrict-prototypes
+
+Commands:
+
+p --> pause
+left arrow, right arrow, down arrow -> Move the cursor
+up arrow -> makes the ball fall faster
+q / ESC -> quit
+
+LICENSE
+
+The source code of this experiment is GPL
+(http://www.gnu.org/copyleft/gpl.html).
+
+The source code in the file src/seesound.cpp, which
+is mostly based on the code of Dr. Peter B.L. Meijer.
+The page I downloaded it from says it's free software, but
+it lacks of a specific license. I contacted him and he said that a link to his page is enough,
+so We have an explicit permission now.
+
+Patches are more than welcome :)
+
+AUTHOR
+
+Nelson Castillo <nelsoneci@gmail.com>

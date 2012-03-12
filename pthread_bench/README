@@ -1,0 +1,69 @@
+PthreadBench
+
+  This is a small program to test the new NPTL
+  (Native POSIX Threading Library) against the old
+  LinuxThreads implementation.
+
+Selecting the right library at runtime
+
+  Ulrich Drepper explains the environment variable LD_ASSUME_KERNEL
+  (http://people.redhat.com/drepper/assumekernel.html), which
+  can be used to have the dynamic linker select the old linuxthreads-0.10
+  library or the new NPTL.
+
+   $ LD_ASSUME_KERNEL=2.4.17 getconf GNU_LIBPTHREAD_VERSION
+    linuxthreads-0.10
+
+   $ LD_ASSUME_KERNEL=2.6.1 getconf GNU_LIBPTHREAD_VERSION
+    NPTL 2.3.5
+
+   $ LD_ASSUME_KERNEL=2.6.14 ldd /bin/ls | awk '{print $3}'
+   (0xffffe000)
+   /lib/tls/librt.so.1
+   /lib/libacl.so.1
+   /lib/libselinux.so.1
+   /lib/tls/libc.so.6
+   /lib/tls/libpthread.so.0
+
+   /lib/libattr.so.1
+   /lib/tls/libdl.so.2
+
+                     
+   $ LD_ASSUME_KERNEL=2.4.17 ldd /bin/ls | awk '{print $3}'
+   (0xffffe000)
+   /lib/librt.so.1
+   /lib/libacl.so.1
+   /lib/libselinux.so.1
+   /lib/libc.so.6
+   /lib/libpthread.so.0
+
+   /lib/libattr.so.1
+   /lib/libdl.so.2
+
+Example
+
+    $ # Using LinuxThreads
+    $ LD_ASSUME_KERNEL=2.4.50 ./bench
+    Test Create and destroy : real 16.901300 user 0.580000 sys 2.690000
+    Test Test conditions    : real 1.798375 user 0.580000 sys 0.690000
+    Total : real 18.699675 user 1.160000 sys 3.380000
+
+    $ # Using the NPTL
+    $ ./bench
+    Test Create and destroy : real 4.527526 user 2.460000 sys 1.660000
+    Test Test conditions    : real 1.216970 user 0.630000 sys 1.570000
+    Total : real 5.744496 user 3.090000 sys 3.230000
+
+---
+
+Copyright © 2006 Nelson Castillo <nelsoneci@gmail.com>
+
+This program is free software; you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation; either version 2 of the License, or (at your
+option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+General Public License for more details.

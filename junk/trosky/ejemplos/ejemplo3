@@ -1,0 +1,16 @@
+* gramatica de ejemplo # 3
+* ejemplo de las secuencias reconocidas:
+*         bcaccac
+*         baddddddccac 
+
+<a> -> <b><c>c
+<a> -> e<d><b>
+<b> ->
+<b> -> b<c><d><e>
+<c> -> <d>a<b>
+<c> -> ca
+<d> ->
+<d> -> d<d>
+<e> -> e<a>f
+<e> -> c
+

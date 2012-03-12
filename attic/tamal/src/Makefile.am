@@ -1,0 +1,53 @@
+bin_PROGRAMS=tamal
+
+tamal_SOURCES=                            \
+              tamal.h                     \
+              tam_apply.h                 \
+              tam_apply.c                 \
+              tam_auxeval.c               \
+              tam_auxeval.h               \
+              tam_environment.c           \
+              tam_environment.h           \
+              tam_error.c                 \
+              tam_error.h                 \
+              tam_eval.c                  \
+              tam_eval.h                  \
+              tam_func.c                  \
+              tam_func.h                  \
+              tam_garbage.c               \
+              tam_garbage.h               \
+              tam_hashfunc.c              \
+              tam_hashfunc.h              \
+              tam_main.c                  \
+              tam_module.h                \
+              tam_module.c                \
+              tam_module_lispcore.c       \
+              tam_module_lispcore.h       \
+              tam_object.c                \
+              tam_object.h                \
+              tam_object_bool.c           \
+              tam_object_bool.h           \
+              tam_object_nil.c            \
+              tam_object_nil.h            \
+              tam_object_number.c         \
+              tam_object_number.h         \
+              tam_object_module.c         \
+              tam_object_module.h         \
+              tam_object_pair.c           \
+              tam_object_pair.h           \
+              tam_object_proc.c           \
+              tam_object_proc.h           \
+              tam_object_symbol.c         \
+              tam_object_symbol.h         \
+              tam_object_undef.h          \
+              tam_object_undef.c          \
+              tam_primitive.c             \
+              tam_primitive.h             \
+              tam_stack.c                 \
+              tam_stack.h                 \
+              tam_symbol_table.c          \
+              tam_symbol_table.h          \
+              tam_input.y                 \
+              tam_input.h
+
+EXTRA_DIST=mc.scm test.txt

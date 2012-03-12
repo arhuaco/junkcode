@@ -1,0 +1,34 @@
+To do:
+- Fix the bug with the custom version of cons, car and cdr. See examles.scm inside doc/.
+- you could use zero as a return value for error. Right now it's slow.
+- Don't use static arrays for error reporting. Don'e be lazy and use malloc and free. It's damn-slow.
+- get rid of the function tam_object_istype_byname and use an enum or something faster and less error prone.
+- Allow the user to load modules at runtime.
+- we might have to create our own environment for the arguments. arg1
+  is available when we do an (eval exp), and this is not ok. So arg1
+  should reside in the private environment... Well, I will solve this issue
+  very easily for now =) I will add a leading space to the symbols, and in
+  this way they won't conflict with the ones that the user will define.
+- should calculate the hash of the symbols when they're created! this could save some time.
+- TAMObjectPrint should receive an stream (FILE *). see tam_object.h
+- We are only parsing files. We have to parse from strings.
+- Make the lexer thread safe. Put global variables in a structure. And find out how to to this with Bison.
+- The input buffer might grow a lot. Shrink it once in a while if needed.
+- The used can define special symbols ("if", "define"...) but the behavior of the interpreter does not change.
+
+To keep in mind:
+
+- objects of type procedure are not responsible for the data of the primitive procedures. The idea behind modules is that you can start doing this think by yourself, perhaps using a private evaluation environment with garbage collection. The user can use this data to store anyting, for example, a mutex for threads.
+- if we decide to implement threads, you'll have to put exclusions in the static data shared by all the modules (tam_module.h, tam_objects.h)
+- we should allow the user to override behaviors on run time (prompt, wheter to print befor evaluation, ...)
+- both tam_object_used_unset and tam_object_used_set have optimizations
+- should we add set!?
+- the object stack was not weel designed. There shouldn't been a type there. You can also use the stack for the object type.
+
+Maybe:
+
+- now that we have "bootstrapped" we could define everyting as symbols, and
+  the user will be able to overload them, just like in guile. But umb-scheme
+  does not allow this. UPDATE : Well, I just noticed why lambda has to be a
+  special form...
+- should we support both integers and reals?

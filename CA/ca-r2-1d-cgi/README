@@ -1,0 +1,16 @@
+  ca-r2-1d-to-img
+
+  CGI program to display png images for r=2 1-dimensional Cellular Automata
+
+Installing:
+
+- You need GD to build this program
+  debian package "libgd2-dev".
+
+  To build it, just type "make". 
+
+  Then, move the program ca-r2-1d-to-img to your cgi-bin directory.
+
+
+Nelson Castillo
+nelsoneci@gmail.com

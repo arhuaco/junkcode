@@ -1,0 +1,331 @@
+  
+                                     \\|//
+                                     (@ @)
+                       ---------oOO---(_)---OOo---------
+                       :       MANUAL DE TROSKY        :
+                       ---------------------------------
+                                   |__|__|
+                                    || ||
+                                   ooO Ooo
+  
+   Contenido
+
+   [1]. ¿Qué es trosky?
+   [2]. ¿Cómo se usa?
+
+       [2.1]. Ejemplos bajo D.O.S
+       [2.2]. Ejemplos bajo Linux
+
+   [3]. Sintaxis de la gramática
+   [4]. Código generado
+   [5]. Autores
+
+
+[1]. ¿Qué es Trosky?
+
+   El programa  Trosky  genera  el código fuente  en lenguaje C  para
+   reconocer una gramática LL(1).   Fue desarrollado en el transcurso
+   de la materia Laboratorio de teoría de lenguajes en la Universidad
+   del Magdalena bajo la dirección del  profesor Roberto Florez de la
+   Universidad de Antioquia.
+
+[2]. ¿Cómo se usa?
+
+   Es muy fácil =)
+
+   El programa  es invocado desde la línea de comandos, la  salida
+   puede ser dirigida hacia la salida estándar (stdout) ó hacia un
+   archivo.      Dirigir  la  salida  hacia  la salida estándar es
+   especialmente útil cuando se desea redireccionar  la salida del
+   programa.   Para  ilustrar lo anterior se entregarán aparte los
+   ejemplos bajo D.O.S. y bajo Linux. Se  recomienda  imprimir  el
+   presente documento de ayuda.
+
+       trosky fuente [destino]
+
+   -Fuente:
+     El archivo fuente  puede  ser escrito en un editor de texto.
+     Ver [3] para detalles acerca de la sintaxis de la gramática.
+
+   -Destino(Opcional):
+     Archivo de destino para el código C.
+
+[2.1]. Ejemplos bajo D.O.S
+
+   Un  archivo conteniendo la gramática puede  ser escrito en un editor
+   de texto convencional,  si se desea se puede leer la gramática desde
+   la consola.   Note que para Trosky es lo mismo leer desde la consola
+   que leer desde un archivo  por lo que esta opción puede parecer poco
+   amigable, pero útil en ciertas ocasiones.
+
+   Ejemplo: leyendo desde la consola
+
+         c:\>trosky con
+         <s>->1<s>1
+         <s>->0
+         ^Z
+
+   El ingreso de producciones terminará si un error es encontrado, o
+   cuando el  usuario lo desee pulsando Ctrl+Z y luego ENTER,   ó F6
+   y luego ENTER.
+
+   Es  recomendable escribir la gramática usando un editor  de  texto
+   disponible en el sistema, como el EDIT en este caso. Esto facilita
+   la corrección   de  errores  y permite  conservar  el  archivo que
+   contiene el fuente de la gramática.
+
+   Ejemplo: Leyendo desde un archivo
+
+         Escribir en un editor de texto la siguiente gramática
+         y  guardarla en el archivo  gic01,  Trosky diferencia
+         las mayúsculas de las minúsculas.
+
+         ----listado de gic01 ------
+
+         * Gramática de ejemplo # 1
+         <s> -> 1<s>1
+         <s> -> 0<s>0
+         <s> -> m
+
+         ---------------------------
+
+         Luego la gramática puede ser ingresada a través de la
+         línea de comandos.
+
+         C:\>trosky gic01
+
+         Escribe el código  fuente  del reconocedor de la gramática
+         que se encuentra en el archivo gic01 en la salida estándar,
+         por defecto la pantalla.
+
+         C:\>trosky gic01 | more
+
+         Muestra el texto con pausas entre pantallas, permitiendo
+         así ver el código del reconocedor completo.
+
+         C:\>trosky gic01 prn
+
+         Escribe el código fuente del reconocedor en la impresora.
+
+         C:\>trosky gic01 gic01.c
+
+         Escribe el código fuente  del  reconocedor  en  el  archivo
+         gic01.c que puede ser compilado más tarde con un compilador
+         de  C, tal como TURBO-C o Borland C++.
+
+  Ejemplo: Compilación usando Borland C++
+
+         C:\>trosky gic01 gic01.c
+         C:\>bcc  gic01.c
+         C:\>gic01.exe
+   
+[2.2]. Ejemplos bajo Linux
+
+                               .~.
+                               /V\   L   I   N   U   X
+                              // \\  where do you want
+                             /(   )\  to go tomorrow?
+                              ^^-^^
+ 
+   Un  archivo conteniendo la gramática puede  ser escrito en un editor
+   de texto convencional,  si se desea se puede leer la gramática desde
+   la consola.   Note que para Trosky es lo mismo leer desde la consola
+   que leer desde un archivo  por lo que esta opción puede parecer poco
+   amigable, pero útil en ciertas ocasiones.
+
+  Ejemplo: leyendo desde la consola
+
+         $trosky /dev/console
+         <s>->1<s>1
+         <s>->0
+         Ctrl+D
+
+        El ingreso de producciones terminará  si un error es
+        encontrado, o cuando el  usuario lo  desee  pulsando
+        Ctrl+D.
+
+   Es recomendable escribir la gramática usando un editor de  texto
+   disponible en el sistema, como el vi en este caso. Esto facilita
+   la corrección   de  errores  y permite  conservar el archivo que
+   contiene el fuente de la  gramática.  El  editor  de texto vi se
+   encuentra disponible en casi todas las versiones de UNIX.     El
+   editor  de texto pico es más cómodo  que el vi,  pero  puede  no
+   estar en su sistema.
+
+   Ejemplo: Leyendo desde un archivo
+
+         Escribir en un editor de texto la siguiente gramática
+         y  guardarla en el archivo  gic01,  Trosky diferencia
+         las mayúsculas de las minúsculas.
+
+         ----listado de gic01 ------
+
+         * Gramática de ejemplo # 1
+         <s> -> 1<s>1
+         <s> -> 0<s>0
+         <s> -> m
+
+         ---------------------------
+
+         Luego la gramática puede ser ingresada a través de la
+         línea de comandos.
+
+         $trosky gic01
+
+         Imprime el  código  fuente  del reconocedor de la gramática
+         que se encuentra en el archivo gic01 en la salida estándar,
+         por defecto la pantalla.
+
+         $trosky gic01 | more
+
+         Muestra el texto con pausas entre líneas.
+         
+         $trosky gic01 | less
+
+         Nota: presione 'q' para salir del programa less.
+
+         Si el programa less se encuentra en su sistema, redireccionar
+         la   salida  puede ser una  buena  forma de revisar el código
+         generado debido  a que el programa  less permite desplazar el
+         texto en cualquier dirección.
+
+         $trosky gic01 /dev/lp0
+         ó
+         $trosky gic01 /dev/lp1
+
+         Escribe el código fuente del reconocedor en la impresora.
+         Se debe tener permiso para usar le impresora.
+                 
+         $trosky gic01 /dev/null
+
+         Envía el código fuente de la gramática a la basura.  Esto
+         es  útil  cuando  se  desea  saber  si  el archivo fuente
+         contiene errores de sintaxis pero no se desea conocer  el
+         código del reconocedor.
+    
+         $trosky gic01 gic01.c
+
+         Escribe el código fuente  del  reconocedor  en  el  archivo
+         gic01.c que puede ser compilado más tarde con un compilador
+         de código C, cómo el GNU C Compiler.
+
+  Ejemplo: Compilación usando GNU C Compiler
+
+         $trosky gic01 gic01.c
+         $gcc gic01.c -o gic01
+         $./gic01
+
+[3]. Sintaxis de la gramática
+
+  Si  existe  un error de sintaxis en el archivo fuente que contiene la
+  gramática se mostrará un mensaje explicando lo ocurrido y el programa
+  terminará.  Se  explicará  brevemente la sintaxis  que debe ser usada
+  para ingresar gramáticas al programa.
+
+        Los nodos no-terminales deben estar encerrados entre el
+        caracter '<' y el caracter '>',sin espacios. El  nombre
+        de la  producción  puede  incluir letras,  números y el
+        caracter '_'. Ejemplo:
+
+         <S>
+         <prod_1>
+
+        Se hace diferencia entre mayúsculas  y minúsculas  tanto
+        para los no-terminales como para los terminales,  por lo
+        que los no-terminales <s> y <S> son diferentes entre si.
+
+        Se admiten líneas de comentarios siempre y cuando  estas
+        comiencen por un  asterisco '*'.
+
+        Se  utiliza  una  flecha  '->'  para  separar   el  lado
+        izquierdo del lado derecho de una producción.
+
+        No  se  admiten  espacios  entre  los  símbolos del lado
+        derecho, una producción escrita de  la  siguiente  forma
+        genera un error de sintaxis.
+
+        <S> -> <S>a <T>
+                   |
+                   Espacio no permitido.
+ 
+
+        Se  admiten  producciones  nulas,  la  definición de una
+        producción termina con un caracter  nueva línea o con el
+        fin de archivo, ejemplo:
+
+        <S> -> a<s>
+        <S> ->
+
+  Ejemplos :
+  
+  -----------------------------------
+  * Gramática de ejemplo #2
+  * Reconocedor básico de expresiones
+  * de dos operaciones, suma y producto
+
+  <e> -> <t><lista_e>
+  <lista_e> -> +<t><lista_e>
+  <lista_e> ->
+  <t> -> <p><lista_t>
+  <lista_t> -> *<p><lista_t>
+  <lista_t> ->
+  <p> -> (<e>)
+  <p> -> d
+  -----------------------------------
+  * Gramática de ejemplo #3
+
+  <a> -> <b><c>c
+  <a> -> e<d><b>
+  <b> ->
+  <b> -> b<c><d><e>
+  <c> -> <d>a<b>
+  <c> -> ca
+  <d> ->
+  <d> -> d<d>
+  <e> -> e<a>f
+  <e> ->c
+  -----------------------------------
+  * Gramática de ejemplo #4
+  
+  <S> -> x<S>
+  <S> -> a<S>b
+  <S> -> w
+  -----------------------------------
+
+[4]. Código generado
+
+ El  código generado escrito en lenguaje C, puede ser compilado  con un
+ compilador  de  código  C++  estándar.  Se compiló exitosamente usando
+ TURBO-C, Borland C++ 4.5/5.0 (bcc) bajo  D.O.S. y  el GNU  C  COMPILER
+ (gcc) bajo Linux.    El código generado hace uso de memoria dinámica e
+ incluye las  funciones  necesarias  para el manejo de una pila con una
+ lista ligada.
+
+ El  reconocedor  descendente  generado  es  una  máquina de pila.   El
+ programa   genera  comentarios apropiados que le permitirán comprender
+ el  código  generado si usted se encuentra familiarizado con este tipo
+ de reconocedores.
+
+ Al  compilar  el código generado puede mostrarse un warning por el uso
+ de la función gets.    No se recomienda el uso de esta función  porque
+ no revisa el desbordamiento  del buffer de lectura.  Si piensa emplear
+ el programa generado continuamente, se recomienda   editar el código y
+ utilizar otra forma de lectura. Se decidió  dejar la función gets para
+ mantener el código generado legible, se optó  por utilizar  un  buffer
+ de  512 caracteres,  tamaño aceptable para  el  propósito del programa
+ generado.
+
+[5]. Autores
+
+ Nelson Enrique Castillo Izquierdo
+ <nelsoneci@hotmail.com>
+
+ Eduardo de Jesús Daza Castillo
+ <edazc@hotmail.com>
+
+ Universidad del Magdalena
+ Facultad de Ingeniería
+ Programa de Ingeniería de Sistemas
+ VII semestre
+
+ Agosto de 1999

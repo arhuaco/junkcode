@@ -1,0 +1,13 @@
+scancodes:
+
+I learnt about the scancodes of my keyboard using
+the showkey program.
+
+apt-get install console-tools-dev
+apt-get source console-tools
+
+To debug kbd_parse.c I used a callback inserted in showkey.c.
+
+my keyboard:
+$ dmesg | grep keyb
+input: AT Translated Set 2 keyboard on isa0060/serio0

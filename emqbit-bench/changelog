@@ -1,0 +1,14 @@
+2008-04-25  Nelson Castillo <nelson@emqbit.com>
+  Changed the way we gather timings from the system.
+
+2008-04-23  Nelson Castillo <nelson@emqbit.com>
+   Added a simple Makefile.
+   Contributed by Matteo Croce <matteo@openwrt.org>.
+
+2007-04-16  Nelson Castillo <nelson@emqbit.com>
+   Fixes for the FLOPSs calculation method in bench.c.
+   Patch contributed by Søren Andersen <san@rosetechnology.dk).
+
+2007-03-14  Nelson Castillo <nelson@emqbit.com>
+   First release.
+   Code by Nelson Castillo and Andrés Calderón.

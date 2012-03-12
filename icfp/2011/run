@@ -1,0 +1,4 @@
+#!/bin/sh
+
+./script_player.py $1
+rm *.pyc

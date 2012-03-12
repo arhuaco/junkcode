@@ -1,0 +1,13 @@
+ * Now we can apply procedures
+
+2003-05-14    Nelson    <arhuaco@yahoo.com>
+
+ * tagged r-02
+
+2003-05-13    Nelson    <arhuaco@yahoo.com>
+
+ * tagged r0-01
+ * Now we have if
+ * We used car so we can print correct code now (not the code inside of a pair).
+ * Now we have car and cdr
+ * Now we have the marvelous object nil.

@@ -1,0 +1,15 @@
+Handy scripts:
+
+ parse_diehardc.pl
+
+   You can pipe the output of DiehardC to this program
+   and it will compute a score that ranges from 0 to 23
+   depending on how well the automaton performs in the
+   tests.
+   
+ plot_evolution.pl
+
+   You can pipe the GALib output file "bog.dat" to this
+   program and it will show a graphic generated from the
+   data of the evolution. You can also generate png images
+   with it.

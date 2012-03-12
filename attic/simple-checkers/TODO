@@ -1,0 +1,7 @@
+Bugs:
+
+
+There's a bug. In the evaluation, the function only counts
+stones on the board. If there are not moves available for
+one of the player, the game is over. So we have to fix
+this bug.

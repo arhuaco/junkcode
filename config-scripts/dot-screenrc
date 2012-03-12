@@ -1,0 +1,45 @@
+# The command prefix, rebind to C-z to make Emacs keybindings easier
+#escape ^zz
+#escape ^jj
+
+# Customize options
+sorendition         kG # black  on bold green
+activity            "activity in %n (%t) [%w:%s]~ ^G"
+bell                "bell     in %n (%t) [%w:%s]~ ^G"
+pow_detach_msg      "BYE"
+vbell_msg           " *beep* "
+defmonitor          off
+nethack             on
+startup_message     off
+defscrollback       1024
+
+# The status line
+hardstatus on
+hardstatus alwayslastline
+
+# Hostname, datetime prefix
+hardstatus string "%{rk}%H %{gk}%c %{yk}%M%d %{wk}%?%-Lw%?%{bw}%n*%f%t%?(%u)%?%{wk}%?%+Lw%?"
+
+# Hostname, datetime suffix
+#hardstatus string "%{.bW}%-w%{.rW}%n %t%{-}%+w %=%{..G} %H %{..Y} %m/%d %C%a "
+
+# Basic display
+#hardstatus string "%{= kc} %?%-Lw%?%{= kY}%n*%f %t%?(%u)%?%{= kc}%?%+Lw%?"
+
+# Can use caption if the terminal doesn't support hs
+#caption always "%{= kc} %?%-Lw%?%{= kY}%n*%f %t%?(%u)%?%{= kc}%?%+Lw%?"
+
+# Custom bindings.
+bind j focus down
+bind k focus up
+# Might need this on Debian systems.
+#bindkey -k kb stuff "177"
+# Default screens on startup
+#screen -M 0 mutt
+#screen -t irssi 1 irssi --connect=irc.oftc.net
+#screen -t emacs 2 emacs
+#screen -t mail 3 pine
+#screen -t slashdot 4 lynx http://www.slashdot.org/
+#screen -t k5 5 lynx http://www.kuro5hin.org/
+#screen -t bar 6 ssh foo@bar
+

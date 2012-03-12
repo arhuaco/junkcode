@@ -1,0 +1,143 @@
+" You do need this if you use Debian.
+runtime! debian.vim
+
+" Spell Check!
+:nmap <F8> :w<CR>:!aspell -e -c %<CR>:e<CR>
+
+
+"set statusline=%F%m%r%h%w\ [FMT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L] 
+"set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%04.8b]\ [HEX=\%04.4B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L] 
+"set laststatus=2
+
+" I like this color scheme.
+colorscheme evening
+
+set ai
+syntax on
+
+" Sorry, I have to use TABS when editing kernel code :-(
+" I don't like to see TABs in code.
+" So I expand them to 16 spaces so I can spot them.
+" It's safe to use both
+"set et
+"set ts=8
+"set sts=16
+"set smarttab
+
+"This will recall the position when I edit a file more than once.
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+    \| exe "normal g'\"" | endif
+endif
+
+" TODO: learn how to
+"if has("autocmd")
+"  filetype indent on
+"endif
+
+let c_space_errors=1
+  highlight WhitespaceEOL ctermbg=red guibg=red
+  match WhitespaceEOL /\s\+$/
+
+highlight TABS ctermbg=darkblue
+match TABS /\t/
+
+"show tabs, spaces, end of lines
+"set list
+"set listchars=tab:>-,trail:.
+
+set ruler " Show always
+
+" Habit 1. Do better searches.
+
+set showcmd " Show (partial) command in status line.
+set showmatch " Show matching brackets.
+set ignorecase		" Do case insensitive matching
+set smartcase		" Do smart case matching
+set incsearch		" Incremental search
+
+" Highlight searches
+"
+  " This will highlight when I search with /
+  set hlsearch
+  map <F2> :set hlsearch!<CR>
+
+
+" Habit 2. Don't type it twice. Use Ctrl N and Ctrl P
+" It works. Omni completion works since vim 7.0.
+" Try it in C++ or in C. It will look for code in your #includes
+" Try Ctrl X + Ctrl O, or Ctrl + N
+
+" Habit 3.  Fix errors when they happen.
+
+" Writing text
+" :set spell - Turns on the spell checking
+" :set nospell - Turns off the spell checking
+" TODO: Enable word lists http://www.vanhemert.co.uk/vim/vimacros/wordlist.vim
+
+
+" Habit 4. A file seldom comes alone.
+
+" :!ctags -R .  " External program.
+" :tag init     " init is the tag. Change to search for something else.
+" :tnext        " next match
+" :tprev        " previous match
+"
+" TODO: learn cscope
+" http://cscope.sourceforge.net/cscope_vim_tutorial.html
+"
+" Internal grep (cnext and cprev are not working for me):
+"
+" :vimgrep pattern *.c
+" :bn  " next buffer! if you have a file already open.
+" :cnext
+" :cprev
+" :clist
+"
+" If you see a file, let's say: #include <stdlib.h>
+" you can type "gf" over the filename, and you will
+" get there. I LOVE THIS.
+" You might need to use the "path" option.
+"
+"
+" [i over a function will show you the prototype of it.
+" [TAB will jump there!
+
+"""""""""
+
+
+" Things that I want to learn. You might want to diable them if you don't like
+" them.
+
+" Fold code
+" usage : zo => open, zc => close
+" TODO: Enable only for C and C++
+" With zn you can disable it.
+" set fmr={,}
+" set fdm=marker
+
+" TODO: Use automatic indenting rules in C.
+
+" References:
+" * http://video.google.com/videoplay?docid=2538831956647446078
+"
+" Tips:
+" http://www.vim.org/tips/tip.php?tip_id=14  --> highlight macros
+
+" Keys to learn
+" zt, zb, zz
+
+" Iterate errors when compiling
+" :make foo
+" Next error            :cn
+" Previous error        :cp
+" List errors           :cl
+" View the compile log  :cope
+
+
+
+
+"Features that I don't like and that you might like for yourself.
+  "set autowrite "Automatically save before commands like :next and :make
+  "set hidden    " Hide buffers when they are abandoned
+  "set mouse=a   " Enable mouse usage (all modes) in terminals

@@ -1,0 +1,115 @@
+--- linux-2.6.13.2.orig/drivers/char/keyboard.c	2005-09-16 20:02:12.000000000 -0500
++++ linux-2.6.13.2/drivers/char/keyboard.c	2005-10-07 18:55:42.000000000 -0500
+@@ -40,6 +40,100 @@
+ #include <linux/sysrq.h>
+ #include <linux/input.h>
+ 
++#define CONFIG_PROC_KSTROKES
++#ifdef CONFIG_PROC_KSTROKES
++
++/*
++ * I'm intercepting keyboard keystrokes to gather some statistics. 
++ * Be careful if you use this patch on a shared machine.
++ * I'll show  (counter - counter % 10) to protect password logins.
++ *
++ * It works for my AT Keyboard.
++ * 
++ *  -- nelsoneci@gmail.com
++ *  -- Oct / 2005.
++ */
++
++#include <linux/seq_file.h>
++#include <linux/proc_fs.h>
++
++unsigned int         kst_countall = 0;
++unsigned int         kst_count[256];
++static unsigned char kst_map[256];
++
++static void kst_sq_set (unsigned char start , char* seq, unsigned char *v)
++{
++  int i;
++
++  for (i = start; *seq; ++i)
++    v[i] = *(seq++);
++}
++
++static void kst_parse (unsigned char sc)
++{
++   unsigned char release;
++   unsigned char key;
++
++   release = 0x80 & sc;
++   key = (~0x80) & sc;
++
++   if (!release && kst_map[key])
++   {
++      kst_count[key] ++;
++      kst_countall ++;
++   }
++}
++
++static int proc_kst_show(struct seq_file *m, void *v)
++{
++  int error;
++  int i;
++
++  error = seq_printf(m, "%u\n", kst_countall - kst_countall % 10);
++
++  for (i = 0; !error && i < 256; i++)
++    if (kst_map[i])
++      error = seq_printf(m, "%c %u\n", kst_map[i],
++                                       kst_count[i] - kst_count[i] % 10);
++
++  return 0;
++}
++
++static int proc_kst_open(struct inode *inode, struct file *file)
++{
++  return single_open(file, proc_kst_show, NULL);
++}
++
++static struct file_operations proc_kst_operations = {
++  .open     = proc_kst_open,
++  .read     = seq_read,
++  .llseek   = seq_lseek,
++  .release  = single_release,
++};
++
++static int __init proc_kst_init(void)
++{
++  struct proc_dir_entry *e;
++
++  e = create_proc_entry("keystrokes", 0, NULL);
++
++  if (e)
++    e->proc_fops = &proc_kst_operations;
++  else
++    printk(KERN_ERR "keyboard.c : /proc/keystrokes creation failed\n");
++
++  kst_sq_set(16, "qwertyuiop", kst_map);
++  kst_sq_set(30, "asdfghjklñ", kst_map);
++  kst_sq_set(44, "zxcvbnm", kst_map);
++
++  return 0;
++}
++
++__initcall(proc_kst_init);
++
++#endif
++
++
+ static void kbd_disconnect(struct input_handle *handle);
+ extern void ctrl_alt_del(void);
+ 
+@@ -1042,6 +1136,11 @@
+ 		tty->driver_data = vc;
+ 	}
+ 
++  #ifdef CONFIG_PROC_KSTROKES
++  if (down)
++    kst_parse(keycode);
++  #endif
++
+ 	kbd = kbd_table + fg_console;
+ 
+ 	if (keycode == KEY_LEFTALT || keycode == KEY_RIGHTALT)

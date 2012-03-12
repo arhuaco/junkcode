@@ -1,0 +1,7 @@
+swap-endian : program to swap the endianess in a sequence of ieee floats
+file-statis : a program that shows the max, min and avg of a sequence of floats
+
+See:
+
+http://en.wikipedia.org/wiki/Endian
+http://www.codeproject.com/cpp/endianness.asp

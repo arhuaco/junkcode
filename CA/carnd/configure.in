@@ -1,0 +1,42 @@
+AC_INIT(src/util.h)
+AM_INIT_AUTOMAKE(carand, 0.1.1)
+AM_CONFIG_HEADER(src/config.h)
+
+dnl Checks for programs.
+AC_PROG_CC
+AC_PROG_CXX
+AC_PROG_INSTALL
+
+dnl Checks for header files.
+AC_CHECK_HEADERS(math.h)
+AC_CHECK_HEADERS(stdio.h)
+AC_CHECK_HEADERS(stdlib.h)
+AC_CHECK_HEADERS(string.h)
+
+AC_ARG_ENABLE(debug, [  --enable-debug          turn on debugging [default=no]],if test "x$enableval" = "xyes"; then
+  CFLAGS="-g $CFLAGS"
+fi)
+
+AC_ARG_ENABLE(warnings, [  --enable-warnings       turn on warnings [default=yes]],
+if test "x$enableval" = "xyes"; then
+  CFLAGS="-Wall $CFLAGS"
+fi)
+
+AC_ARG_ENABLE(warnings, [  --enable-pedantic       turn on pedantic [default=yes]],
+if test "x$enableval" = "xyes"; then
+  CFLAGS="-pedantic $CFLAGS"
+fi)
+
+AC_ARG_ENABLE(efence, [  --enable-efence         link against efence [default=no]],
+if test "x$enableval" = "xyes"; then
+  AC_CHECK_LIB(efence, malloc)
+fi)
+
+AC_ARG_ENABLE(profile, [  --enable-profile        profiling          [default=no]],
+if test "x$enableval" = "xyes"; then
+  CFLAGS="-pg $CFLAGS"
+fi)
+
+AC_CHECK_FUNCS(pow logl)
+
+AC_OUTPUT(Makefile src/Makefile)

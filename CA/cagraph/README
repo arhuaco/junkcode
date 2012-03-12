@@ -1,0 +1,56 @@
+These programs operate on 1-dimensional r=2 cellular automata.
+
+
+CAGRAPH : Generate graphs
+
+  This program can be used to generate graphs with all states of the CA.
+
+  To generate an image with this program using the rule 1687722855 and
+  an automaton of size 7.
+
+    $ ./cagraph 1687722855 7
+    $ dot -Tpng graph-rule1687722855-n7.dot > rule1687722855-n7.png
+
+  NOTE: The dot program is part of graphviz (http://www.graphviz.org).
+
+CA-FINDCYCLES:
+
+  This program prints the length of each cycle in CA.
+  To generate all the cycles of the rule 1687722855
+  using a size of 7.
+
+  $ ./cafindcycles 1687722855 7
+  2
+  77
+  14
+
+  You can modify it to have it print more data. An starting state
+  for each cycle, for instance.
+
+SCRIPTS:
+
+  * ca-cycle-stats.pl:
+
+  I used this script to generate the file cycle-stats.txt. It allows us
+  to use the following scripts to display nice graphics.
+
+  * ca-findcycles-plot-stats.pl:
+
+  ./ca-findcycles-plot-stats.pl cycle-stats.txt
+
+  It should plot a nice graph using the data collected in the previous script.
+
+  * ca-findcycles-print-max-rules.pl
+
+  ./ca-findcycles-print-max-rules.pl cycle-stats.txt
+
+  It should print the maximum cycle found for each CA size.
+
+NOTES
+
+  AIX:
+
+  ./configure --disable-dependency-tracking CFLAGS=-maix64 LDFLAGS=-maix64 
+
+Nelson.
+nelsoneci@gmail.com

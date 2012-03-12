@@ -1,0 +1,14 @@
+* gramatica de ejemplo #2
+* genera expesiones basicas
+* con las operaciones
+* pruducto y suma
+
+<E>       -> <T><LISTA_E>
+<LISTA_E> -> +<T><LISTA_E>
+<LISTA_E> ->
+<T>       -> <P><LISTA_T>
+<LISTA_T> -> *<P><LISTA_T>
+<LISTA_T> ->
+<P>       -> (<E>)
+<P>       ->d
+

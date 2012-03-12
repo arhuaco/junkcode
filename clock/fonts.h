@@ -1,0 +1,15 @@
+char * get_0(void);
+char * get_1(void);
+char * get_2(void);
+char * get_3(void);
+char * get_4(void);
+char * get_5(void);
+char * get_6(void);
+char * get_7(void);
+char * get_8(void);
+char * get_9(void);
+char * get_sp(void);
+char * get_dots(void);
+char * get_gt(void);
+char * get_lt(void);
+char * get_dash(void);

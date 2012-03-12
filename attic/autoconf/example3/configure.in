@@ -1,0 +1,22 @@
+dnl un archivo parte del código fuente
+AC_INIT(src/main.c)
+
+dnl nombre programa y la versión
+AM_INIT_AUTOMAKE(example, 0.0.1)
+
+dnl dejemos que se genere
+AM_CONFIG_HEADER(src/config.h)
+
+dnl Checks for programs.
+
+AC_PROG_CC
+AC_PROG_INSTALL
+
+dnl Checks for header files.
+
+AC_CHECK_HEADERS(stdio.h)
+AC_CHECK_HEADERS(stlib.h)
+
+AC_CHECK_FUNCS(printf)
+
+AC_OUTPUT(Makefile src/Makefile)

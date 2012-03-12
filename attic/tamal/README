@@ -1,0 +1,129 @@
+Nelson Castillo.
+nelsoneci@gmail.com
+
+---
+
+Hi =)
+
+1. INTRO
+
+  This my first attempt building a mini-scheme interpreter. The input
+  will be read from stdin. I am surprised because  I have heard  that
+  putting an custom LISP interpreter inside of your  program can make
+  development faster, but now I am experiencing it myself and I now I
+  also 'know' it's true. So after five days of the  birdth  of  Tamal
+  modules are going to be supported, allowing  external  programs  to
+  "live" as objects inside the LISP  environment  and  they can  also
+  create their own environments. I am so exited about this.
+
+2. INPUT
+
+  Right now we are only parsing user input from stdin. But once things
+  are working nice we can extend the parser, which is a separate module.
+  In the parser, the function that returns the user code as data is
+  called "from_stack_to_code" that's inside the file tam_input.y.
+
+3. OBJECTS '() AND undefined
+
+  There are two special simple data types, they're nil and undefined.
+  Inside the user environment, "nil" is defined as "nil" (define nil 'nil),
+  which make this just a simple symbol. To access the real nil used
+  internaly, the user has to write '(). If don't like this, then
+  just redefine nil "(define nil '())" and it wil do the trick.
+
+  When an expression have to return "nothing", for example when an "if"
+  is evaluated and the condition is false, but the user only provided
+  code for the "if-true" part, then we'll return #unspecified, example:
+
+  tamal> (if #f 1)
+  #unspecified
+
+  The behaviors of umb-scheme and guile are very different.
+
+  in umb-scheme:
+
+      ==> (define x 3)
+      x
+      ==> (define y (define x 3))
+      y
+      ==> y
+      x
+      ==> (if #f 1)
+      ()
+  
+      I found this rather confusing... I prefer to use #unspecified =)
+
+  Note that guile accepts this : (define 'a 1), and umb-scheme don't.
+  I won't accept it.
+
+  guile:
+
+  guile> (define x '())
+  guile> x
+  ()
+  guile> (define x (cons 1 '()))
+  guile> (cdr x)
+  ()
+  guile> (eq? '() ())
+  #t
+  guile> nil
+  nil
+  # (eq? 'nil nil)
+  #t
+  guile> (cons 'a nil)
+  (a . nil)
+  guile> (cons 'a '())
+  (a)
+
+  umb-scheme:
+  ==> (define x (cons 1 '()))
+  x
+  ==> (cdr x)
+  ()
+  ==> (eq? '() ())
+  Error: Unquoted ().
+  ==> nil
+  #f
+  ==> (cons 'a '())
+  (a)
+
+  4. OTHER SPECIAL SYMBOLS
+
+  The dot '.' can not be defined by the user. It's reserved for lambda
+  definitions. The module lisp-core will define a few symbols, such as
+  " arg1", and " arg2". The space is important because we don't want them
+  to clash with user-defined symbols, the user will not be able to access
+  these symbols directly, unless he or she writes a module. In the later
+  case he or she should read this file =)
+
+  5. MODULES
+
+  Well. Tamal now supports modules. This is quite interesting.
+  Right now, we have a few simple modules that only register basic
+  procedures that make this language functional. For instance,
+  the module "lisp-core" defines --in the environment where it's loaded--
+  the primitive procedures "car", "cdr", "cons", etc... But we could
+  also have a function of the module that allowed it to create the procedures
+  at run time, or perhaps encapsulate the modules and access everything
+  thru a single function of the module. For instance, you could do
+  (my-module my-private-function '(1 2)), and you could use a separate
+  environment inside of the module for the evaluation of the procedure.
+  This seems to be very flexible...
+
+  About the core modules, remember that they define functions in the
+  environment where they're created and that you get a reference of
+  the module. If you return such reference, it will be available in
+  a previous environment, but the functions that it defined would have
+  been freed automatically, unless you return one.
+
+  6. DATA TYPES
+  
+       * number         (C integer)
+       * bool           (#t or #f)
+       * pair     
+       * nil            (special type used to end lists. It's just as '())
+       * unspecified    (special type used when we have to return nothing)
+
+  7. LICENSE
+
+  TAMAL is GPL.

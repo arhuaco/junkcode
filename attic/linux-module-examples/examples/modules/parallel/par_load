@@ -1,0 +1,26 @@
+#!/bin/sh
+module="par"
+device="par"
+mode="664"
+
+if grep '^staff:' /etc/group > /dev/null; then
+    group="staff"
+else
+    group="wheel"
+fi
+
+/sbin/insmod ./$module.ko $* || exit 1
+
+major=`cat /proc/devices | awk "\\$2==\"$module\" {print \\$1}"`
+
+rm -f /dev/${device}0
+mknod /dev/${device}0 c $major 0
+
+chgrp $group /dev/${device}0 
+chmod $mode  /dev/${device}0 
+
+
+
+
+
+

@@ -1,0 +1,67 @@
+This is an evolving project to explore the space of the 1-dimensional
+r=2 cellular automata. I'm working a lot on this one.
+
+ * carng 
+
+ Random number generation with one-dimensional r=2 cellular automata
+
+ Nelson Castillo <nelsoneci@gmail.com>
+ 
+ Please tell me if you find any bug or have any suggestions.
+
+CREDITS:
+
+ * GALib
+
+ I use the library GALib 2.4.6 by Matthew Wall.
+ (Not anymore, but I the file ex20.C uses GALib).
+ http://lancet.mit.edu/ga/
+
+ I had trouble with GALib and I'm using a 0.0001% of it. I am
+ writing a GA in C.
+ 
+ * diehardc
+
+ I redistribute the DiehardC program version 1.03, September 9, 1998.
+ From the source:
+
+  * Note: This version of diehard was created by Scott Nelson,
+  * working from the original DIEHARD code provided by George Marsaglia.
+
+BUILDING
+
+ $ ./gen.sh
+ $ ./configure
+ $ make
+
+
+To make things faster you might use the IBM compiler on AIX (power5).
+
+./configure CC=xlc CFLAGS="-qarch=pwr5 -qtune=pwr5 -qhot -O5" \
+          --disable-debug --disable-efence
+
+
+ If you want the program to be installed in your system
+ $ make install
+
+ The following options are available in the configure program
+
+ --enable-debug          turn on debugging default=no
+ --enable-warnings       turn on warnings default=yes
+ --enable-pedantic       turn on pedantic default=yes
+ --enable-efence         link against efence default=no
+ --enable-profile        profiling          default=no
+
+ Link again efence if you want to trace memory allocation
+ problems.
+             
+Some of the best rules found by the genetic algorithm.
+The score is computed by the script parse-diehard.pl.
+The maximum score is 23.
+
+           binary rule           score
+01100101010110011001101001010110 23
+10010101010110010110011001100110 23
+10100110100101100101100101100110 22.950
+01101001101010101001101001100101 22.750
+01011010100101101010010101010101 22.000

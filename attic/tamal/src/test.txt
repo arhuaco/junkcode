@@ -1,0 +1,33 @@
+tamal > (define l (cons 1 (cons 2 (cons 3 (cons 4 '())))))
+tamal > l
+(1 2 3 4)
+tamal > (car l)
+1
+tamal > (cdr l)
+(2 3 4)
+tamal > (car (cdr l))
+2
+tamal > (define x (cons car (cons l '())))
+tamal > ((car x) (cdr x))
+(1 2 3 4)
+tamal > (eval '(car '(1 2)))
+1
+tamal > (define x (lambda (x) (car (car x))))
+tamal > (x '((1 2) (3 4)))
+1
+tamal > (define (x y) (cons y y))
+tamal > (x (cons 1 2))
+((1 . 2) 1 . 2)
+
+;definitions
+tamal > (define (list . args) args)
+tamal > (list)
+()
+(list 'a 1 2 3 )
+(quote 'a 1 2 3)
+
+
+tamal > (define x (lambda (. y) (eval (cons + y))))
+(x 1 2 3 4)
+tamal > (define x (lambda (op . y) (eval (cons op y))))
+(x * 2 3 4 5)

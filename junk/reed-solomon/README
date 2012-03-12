@@ -1,0 +1,17 @@
+This code is associated to this weblog post:
+
+http://wiki.freaks-unidos.net/weblogs/arhuaco/reed-solomon
+
+Steps.
+
+1) Download FEC - http://www.ka9q.net/code/fec/
+
+2) Uncompressed it.
+
+3) ln -s fec-3.0.X fec
+
+4) make
+
+I run into a building bug that can be fixed changing a .h.
+
+Comments, etc. to nelsoneci@gmail.com.
