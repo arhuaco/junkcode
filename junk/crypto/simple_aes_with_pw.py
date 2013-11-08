@@ -7,11 +7,10 @@
 # TODO(nel): Migrate form sha256 to scrypt hash when it is available in debian repositories.
 # Python 2.X.
 
-from Crypto.Cipher import AES
 from base64 import b64encode, b64decode
-from os import urandom
+from Crypto.Cipher import AES
 import hashlib
-import getpass # For the example.
+import os
 
 def _h256(k):
     return hashlib.sha256(k).digest()
@@ -25,7 +24,7 @@ def _remove_padding(data):
 
 def encrypt(data, key):
     data = _add_padding(data) # Padding so we can use AES with CBC.
-    iv = urandom(16) # urandom. I know.
+    iv = os.urandom(16) # urandom. I know.
     return b64encode(iv + AES.new(_h256(_h256(key)), AES.MODE_CBC, iv).encrypt(data))
 
 def decrypt(data, key):
@@ -35,6 +34,7 @@ def decrypt(data, key):
 
 def main():
     # Just an example.
+    import getpass
     data = encrypt('hola', getpass.getpass())
     print decrypt(data, getpass.getpass())
 

@@ -3,4 +3,14 @@ How to install a QEMU VM fom an ISO
 Last tried: 2013-04-30
 
 - The filesystem
+
   qemu-img create -f qcow2 ubuntu.qcow2.img 30G
+
+30G is a lot of space.
+
+- Boot from the ISO.
+
+  # TODO(nel): memory.
+
+  qemu -hda ubuntu.qcow2.img -cdrom ubuntu-12.04.2-alternate-amd64.iso -boot d
+
