@@ -1,0 +1,6 @@
+How to install a QEMU VM fom an ISO
+
+Last tried: 2013-04-30
+
+- The filesystem
+  qemu-img create -f qcow2 ubuntu.qcow2.img 30G
