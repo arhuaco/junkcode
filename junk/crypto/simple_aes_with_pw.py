@@ -4,7 +4,9 @@
 #
 # I need to store a key in disk and I want something better than clear text.
 #
-# TODO(nel): Migrate form sha256 to scrypt hash when it is available in debian repositories.
+# TODO(nel): Migrate from sha256 to scrypt hash when it is available in
+# Debian repositories.
+#
 # Python 2.X.
 
 from base64 import b64encode, b64decode
