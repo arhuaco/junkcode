@@ -8,7 +8,6 @@ class SimulateStrategy
 {
     public static final double INITIAL_CAPITAL = 10000;
 
-
     /**
     * Simulate the life of a trading account with the given parameters.
     *
@@ -58,7 +57,7 @@ class SimulateStrategy
         for (double winningProb = 0.3; winningProb <= 0.7; winningProb += 0.01) {
             double sum = 0.0;
             for (int i = 0; i < ntimes; ++i) {
-                sum += Simulate(rand, 1000, 10000, 1000000, winningProb, 1.0, 2.0);
+                sum += Simulate(rand, 1000, INITIAL_CAPITAL, 1000000, winningProb, 1.0, 2.0);
             }
             System.out.printf("%f %.2f\n", winningProb, sum / ntimes);
         }
