@@ -6,8 +6,14 @@ import java.util.Random;
 
 class SimulateStrategy
 {
+    public static final double INITIAL_CAPITAL = 10000;
+
+
     /**
-    * Simulate the life of a trading account with the given parameters - rough simplification.
+    * Simulate the life of a trading account with the given parameters.
+    *
+    * This is an oversimplification! But it helps you understand the probabilities of the game.
+    *
     * You should call this function many times and average the results.
     * @param maxSteps Maximum number of steps of the simulation.
     * @param startingCapital Starting amount of (say) USD dollars.
@@ -25,11 +31,9 @@ class SimulateStrategy
                             double startingCapital, double maxCapital, double winningProbability,
                             double winningPercent, double losingPercent)
     {
-        int i = 0;
-
         double capital = startingCapital;
 
-        for (; i < maxSteps; ++i) {
+        for (int i = 0; i < maxSteps; ++i) {
             if (capital <= 0.0) {
                 return 0.0;  // We lost all the money.
             }
@@ -54,7 +58,7 @@ class SimulateStrategy
         for (double winningProb = 0.3; winningProb <= 0.7; winningProb += 0.01) {
             double sum = 0.0;
             for (int i = 0; i < ntimes; ++i) {
-                sum += Simulate(rand, 272, 10000, 1000000, winningProb, 1.0, 2.0);
+                sum += Simulate(rand, 1000, 10000, 1000000, winningProb, 1.0, 2.0);
             }
             System.out.printf("%f %.2f\n", winningProb, sum / ntimes);
         }
