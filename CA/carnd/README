@@ -17,8 +17,8 @@ CREDITS:
  (Not anymore, but I the file ex20.C uses GALib).
  http://lancet.mit.edu/ga/
 
- I had trouble with GALib and I'm using a 0.0001% of it. I am
- writing a GA in C.
+ I had trouble with GALib and I'm using about 0.1% of it. I wrote 
+ a GA library in C.
  
  * diehardc
 
