@@ -28,4 +28,4 @@ def hash_n(n_times, text):
 for diff in range(0, 257):
   int_diff = compute_difficulty(diff)
   h, total_time = hash_n(10, 'Gloria')
-  print diff, total_time, h
+  print diff, "%.4f" % total_time, h
