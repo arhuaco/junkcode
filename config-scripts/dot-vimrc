@@ -10,7 +10,7 @@ runtime! debian.vim
 "set laststatus=2
 
 " I like this color scheme.
-colorscheme evening
+" colorscheme evening
 
 set ai
 syntax on
