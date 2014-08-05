@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
-# This is very slow, but easy to audit. There are alternatives like:
+# Generate a 'vanity' bitcoin Address.
+# This is very slow, but easy to audit. There are fast alternatives like:
 # https://en.bitcoin.it/wiki/Vanitygen
 
 from bitcoin import * # https://github.com/vbuterin/pybitcointools
