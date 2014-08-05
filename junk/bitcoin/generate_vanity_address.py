@@ -5,8 +5,8 @@
 
 from bitcoin import * # https://github.com/vbuterin/pybitcointools
 from Crypto import Random
-import time
 import datetime
+import time
 import sys
 
 def validate_prefix(prefix):
