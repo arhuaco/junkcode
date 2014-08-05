@@ -5,7 +5,7 @@
 # https://en.bitcoin.it/wiki/Vanitygen
 
 from bitcoin import * # https://github.com/vbuterin/pybitcointools
-from Crypto import Random
+from Crypto import Random # python-crypto package, or https://www.dlitz.net/software/pycrypto/
 import datetime
 import time
 import sys
@@ -16,9 +16,9 @@ def validate_prefix(prefix):
       print >> sys.stderr, 'Invalid char in prefix: {}'.format(c)
       sys.exit(1)
 
-prefix = '1Love' # Desired 'vanity' prefix.
+prefix = '1test' # Desired 'vanity' prefix.
 
-# Harsh validation. Let's not be greedy and accept an approximate solution (mixed case).
+# TODO: Improve validation and matching. Prefixes such as '1Love' should be doable.
 validate_prefix(prefix)
 prefix = prefix.lower()
 validate_prefix(prefix)
