@@ -26,6 +26,9 @@ validate_prefix(prefix)
 out_date = datetime.datetime.fromtimestamp(int(time.time())).strftime('%Y-%m-%d_%H-%M-%S')
 out  = open('{}_{}.log'.format(prefix, out_date),  'w')
 
+print 'Searching for prefix:', prefix
+print 'Good luck. This is slow.'
+
 while True:
   priv = Random.get_random_bytes(256 / 8)
   pub = privtopub(priv)
