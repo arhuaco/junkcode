@@ -1,5 +1,0 @@
-Requirements:
- uthash : Ubuntu:uthash-dev or http://troydhanson.github.io/uthash/.
-
-Usage:
-  LD_PRELOAD_64=./intersect_malloc.so LD_PRELOAD=./intersect_malloc.so [your program]
