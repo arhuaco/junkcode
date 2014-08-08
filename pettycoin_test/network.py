@@ -71,8 +71,8 @@ class Socket(object):
             if len(received) == len_before:
                 # When the socket has an error condtion the first time we
                 # might return true but the next call should fail.
-                print('len before!', file=sys.stderr)
-                #self.is_ok = False
+                if len(received) == 0:
+                    self.is_ok = False
                 break
         return len(received) > 0, received
 
@@ -87,7 +87,7 @@ class JsonSocketReader(object):
     def should_read_more(self):
         return self.sock.is_healthy()
 
-    def read_more(self):
+    def match_next(self):
         if len(self.last_chunk) == 0:
             allowed_read_size  = self. max_json_reply_size - len(self.json_buff)
             assert allowed_read_size >= 0
@@ -111,7 +111,7 @@ class JsonSocketReader(object):
         return False
 
     @staticmethod
-    def wait_for_json_reply(readers,  timeout = 0):
+    def wait_for_json_reply(readers, timeout=0):
         readers_map = {}
         # If we kept this dict we would not have to build it everytime.
         # It is not an issue if there are just a few readers.
@@ -119,13 +119,13 @@ class JsonSocketReader(object):
         for reader in readers:
             readers_sock.append(reader.sock.fileno())
             readers_map[reader.sock.fileno()] = reader
-        reader_with_json = []
+        readers_with_json = []
         try:
             readers_ready, _, _ = select.select(readers_sock, [], [], timeout)
             for reader in [readers_map[fd] for fd in readers_ready]:
-                if reader.read_more():
+                if reader.match_next():
                     print('Got json(internal):', reader.json_buff, file=sys.stderr)
-                    reader_with_json.append(reader)
+                    readers_with_json.append(reader)
                 else:
                     print('Should not read more!', file=sys.stderr)
                     sys.exit(1)
@@ -134,9 +134,7 @@ class JsonSocketReader(object):
             print('Socket.select got exception: {}'.format(error),
                 file=sys.stderr)
             return False, None
-        return reader_with_json
-            
-
+        return readers_with_json
 
 def main():
     sock = Socket()
@@ -145,7 +143,7 @@ def main():
     sock.make_nonblocking()
     reader = JsonSocketReader(sock)
     while reader.should_read_more():
-      readers_with_json = JsonSocketReader.wait_for_json_reply([reader], timeout=1)
+      readers_with_json = JsonSocketReader.wait_for_json_reply([reader], timeout=0.01)
       for reader_ready in readers_with_json:
           print('Got json:'.format(reader_ready.json_buff), file=sys.stderr)
     return 0
