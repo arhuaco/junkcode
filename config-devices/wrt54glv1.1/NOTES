@@ -1,0 +1,6 @@
+tcpdump -Ani eth0 port 4919 and udp
+tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
+listening on eth0, link-type EN10MB (Ethernet), capture size 65535 bytes
+
+08:09:01.166271 IP 192.168.1.1.2048 > 192.168.1.255.4919: UDP, length 1001
+E.....@.@..............7...+..Press reset now, to enter Failsafe!
