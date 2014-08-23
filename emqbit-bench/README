@@ -2,18 +2,9 @@ Here is some code we used for benchmarking purposes. The idea is to be
 able to compare the speed of floating point operations with different
 setups (Kernels, compilers, etc).
 
-Bugs, doubts, patches and suggestions to info@emqbit.com.
-
-Thanks :)
-
-Check:
-
-http://www.linuxdevices.com/articles/AT5920399313.html
-
-In this article we didn't talk about soft-float builds. It is still
-useful. It could have been better... we know, we know.
-
+Bugs, doubts, patches and suggestions to nelsoneci@gmail.com.
 
 Authors:
-Nelson Castillo   nelson@emqbit.com
-Andres Calderon   andres.calderon@emqbit.com
+
+Nelson Castillo   nelsoneci@gmail.com
+Andres Calderon   andresfcalderon@gmail.com
