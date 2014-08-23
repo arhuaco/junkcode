@@ -1,0 +1,11 @@
+config 'wifi-device' 'wl0'
+option 'type'       'broadcom'
+option 'channel'    '9'
+
+config 'wifi-iface'
+option 'device'     'wl0'
+option 'network'    'wan'
+option 'mode'       'sta'
+option 'ssid'       'mynetwork_CHANGE'
+option 'encryption' 'psk2'
+option 'key'        'secretkey_CHANGE'
