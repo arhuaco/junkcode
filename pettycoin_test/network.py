@@ -67,7 +67,7 @@ class Socket(object):
                 print('Socket.recv got exception: {}'.format(error),
                     file=sys.stderr)
                 assert self.is_ok
-                self.is_ok = error.args[0] != errno.EWOULDBLOCK # TODO: Test.
+                self.is_ok = error.args[0] != errno.EWOULDBLOCK
             if len(received) == len_before:
                 # When the socket has an error condtion the first time we
                 # might return true but the next call should fail.
