@@ -1,16 +1,5 @@
-#!/usr/bin/python
-
-# Check the following URI for an explanation of this code.
-# http://wiki.freaks-unidos.net/weblogs/arhuaco/google-treasure-hunt
-
 import sys
 import math
-
-try:
-  import psyco
-  psyco.full()
-except ImportError:
-  print >> sys.stderr, "No Psyco available ! To run faster, please, please install it!\n"
 
 def sieveOfErat(end):
     """ Let's use the simpler Sieve of Eratostenes
