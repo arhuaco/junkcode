@@ -14,7 +14,7 @@ PORT = 2020
 class TestingRequestHandler(socketserver.BaseRequestHandler):
     '''' The request handler. '''
     def handle(self):
-        time.sleep(2)
+        time.sleep(0.3)
         for _ in range(20):
             to_send = json.dumps(json_generator.make_random_json_like_hash())
             print(to_send, file=sys.stderr)

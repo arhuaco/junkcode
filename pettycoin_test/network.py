@@ -1,10 +1,11 @@
 import select
 import socket
 import sys
+import time
 
 MAX_RECV_LEN = 4096
 
-class Socket(object):
+class Socket:
 
     def __init__(self):
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -72,11 +73,12 @@ class Socket(object):
                 break
         return len(received) > 0, received
 
-class JsonSocketReader(object):
+class JsonSocketReader:
     def __init__(self, sock, max_json_size=1024*1024):
         self.sock = sock
         self.last_chunk = bytes()
         self.json_buff = ''
+        self.json_ready = ''
         self.n_open = 0 # Number of '{' chars open.
         self.max_json_reply_size = max_json_size
 
@@ -96,6 +98,7 @@ class JsonSocketReader(object):
         try:
           self.last_chunk = bytes.decode(self.last_chunk)
         except UnicodeDecodeError:
+          print('Unicode decode error. Recovering...', file=sys.stderr)
           # We probably read an incomplete character. Let's keep reading.
           return False
 
@@ -115,27 +118,24 @@ class JsonSocketReader(object):
         self.last_chunk = bytes()
         return False
 
-    @staticmethod
-    def wait_for_json_reply(readers, timeout=0):
-        readers_map = {}
-        # If we kept this dict we would not have to build it everytime.
-        # It is not an issue if there are just a few readers.
-        readers_sock = []
-        for reader in readers:
-            readers_sock.append(reader.sock.fileno())
-            readers_map[reader.sock.fileno()] = reader
-        readers_with_json = []
+    def get_json(self):
+        return self.json_ready
+
+    def wait_for_json(self, timeout=0):
         try:
-            readers_ready, _, _ = select.select(readers_sock, [], [], timeout)
-            for reader in [readers_map[fd] for fd in readers_ready]:
-                if reader.match_next():
-                    print('Got json(internal):', reader.json_ready, file=sys.stderr)
-                    readers_with_json.append(reader)
+            while True:
+                time_before = time.time()
+                readers_ready, _, _ = select.select([self.sock.fileno()], [], [], timeout)
+                if len(readers_ready) > 0:
+                    if self.match_next():
+                        return True
+                timeout -= time.time() - time_before
+                if timeout <= 0.0:
+                    print('Timeout in wait_for_json.', file=sys.stderr)
+                    break
         except socket.error as error:
-            print('Socket exception: {}'.format(error),
-                file=sys.stderr)
-            return False, readers_with_json
-        return True, readers_with_json
+            print('Socket exception: {}'.format(error), file=sys.stderr)
+        return False
 
 def main():
     sock = Socket()
@@ -144,11 +144,8 @@ def main():
     sock.make_nonblocking()
     reader = JsonSocketReader(sock)
     while reader.should_read_more():
-      status, readers_with_json = JsonSocketReader.wait_for_json_reply([reader], timeout=0.01)
-      if not status:
-          print('A readeer might have issues. Be ware of errors.') # TODO:Handle better.
-      for reader_ready in readers_with_json:
-          print('Got json:'.format(reader_ready.json_ready), file=sys.stderr)
+      if reader.wait_for_json(timeout=0.1):
+        print('Got json:{}'.format(reader.get_json()), file=sys.stderr)
     return 0
 
 sys.exit(main())
