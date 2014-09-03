@@ -162,7 +162,7 @@ class JsonSocketReader:
             return False
 
 def main():
-    ''' Our main function. '''
+    ''' Our main functio. Only for testing. '''
     sock = Socket()
     if not sock.connect('localhost', 2020):
         return 1
