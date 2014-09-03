@@ -1,7 +1,3 @@
-#!/usr/bin/env python
-
-from __future__ import absolute_import, division, print_function, unicode_literals
-
 import select
 import socket
 import sys
@@ -58,7 +54,7 @@ class Socket(object):
 
     def receive(self, max_len, timeout=None):
         self.sock.settimeout(timeout)
-        received = ''
+        received = bytes()
         while len(received) < max_len:
             len_before = len(received)
             try:
@@ -79,7 +75,7 @@ class Socket(object):
 class JsonSocketReader(object):
     def __init__(self, sock, max_json_size=1024*1024):
         self.sock = sock
-        self.last_chunk = ''
+        self.last_chunk = bytes()
         self.json_buff = ''
         self.n_open = 0 # Number of '{' chars open.
         self.max_json_reply_size = max_json_size
@@ -89,25 +85,34 @@ class JsonSocketReader(object):
 
     def match_next(self):
         if len(self.last_chunk) == 0:
+            # Mixing bytes and unicode concepts here. Not an issue, we hope.
+            #len(bytes('á', 'utf-8')) == 2, len('á') == 1.
             allowed_read_size  = self. max_json_reply_size - len(self.json_buff)
             assert allowed_read_size >= 0
             status, self.last_chunk = self.sock.receive(allowed_read_size)
             if not status:
                 return False
-        else:
-            self.json_buff = ''
-        
+
+        try:
+          self.last_chunk = bytes.decode(self.last_chunk)
+        except UnicodeDecodeError:
+          # We probably read an incomplete character. Let's keep reading.
+          return False
+
         for idx in range(len(self.last_chunk)):
             if self.last_chunk[idx] == '{':
                 self.n_open += 1
             elif self.last_chunk[idx] == '}':
                 self.n_open -= 1
-                assert self.n_open >= 0
+                assert self.n_open >= 0 # malformed JSON will break this assert.
             self.json_buff += self.last_chunk[idx]
             if self.n_open == 0 and max(len(self.json_buff), idx) > 0: # {...}
-                 self.last_chunk = self.last_chunk[idx + 1:]
+                 # Only inneficient if we expect multiple JSON answers in a reply.
+                 self.last_chunk = bytes(self.last_chunk[idx + 1:], 'utf-8')
+                 self.json_ready = self.json_buff
+                 self.json_buff = ''
                  return True
-        self.last_chunk = ''
+        self.last_chunk = bytes()
         return False
 
     @staticmethod
@@ -124,17 +129,13 @@ class JsonSocketReader(object):
             readers_ready, _, _ = select.select(readers_sock, [], [], timeout)
             for reader in [readers_map[fd] for fd in readers_ready]:
                 if reader.match_next():
-                    print('Got json(internal):', reader.json_buff, file=sys.stderr)
+                    print('Got json(internal):', reader.json_ready, file=sys.stderr)
                     readers_with_json.append(reader)
-                else:
-                    print('Should not read more!', file=sys.stderr)
-                    sys.exit(1)
-                    
         except socket.error as error:
-            print('Socket.select got exception: {}'.format(error),
+            print('Socket exception: {}'.format(error),
                 file=sys.stderr)
-            return False, None
-        return readers_with_json
+            return False, readers_with_json
+        return True, readers_with_json
 
 def main():
     sock = Socket()
@@ -143,9 +144,11 @@ def main():
     sock.make_nonblocking()
     reader = JsonSocketReader(sock)
     while reader.should_read_more():
-      readers_with_json = JsonSocketReader.wait_for_json_reply([reader], timeout=0.01)
+      status, readers_with_json = JsonSocketReader.wait_for_json_reply([reader], timeout=0.01)
+      if not status:
+          print('A readeer might have issues. Be ware of errors.') # TODO:Handle better.
       for reader_ready in readers_with_json:
-          print('Got json:'.format(reader_ready.json_buff), file=sys.stderr)
+          print('Got json:'.format(reader_ready.json_ready), file=sys.stderr)
     return 0
 
 sys.exit(main())

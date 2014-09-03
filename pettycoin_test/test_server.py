@@ -15,10 +15,10 @@ class TestingRequestHandler(socketserver.BaseRequestHandler):
     '''' The request handler. '''
     def handle(self):
         time.sleep(2)
-        for _ in range(10):
+        for _ in range(20):
             to_send = json.dumps(json_generator.make_random_json_like_hash())
             print(to_send, file=sys.stderr)
-            self.request.sendall(to_send)
+            self.request.sendall(bytes(to_send, 'utf-8'))
 
 def main():
     ''' Our main function. '''
