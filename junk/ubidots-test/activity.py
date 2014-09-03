@@ -6,9 +6,6 @@ import os
 import sys
 import time
 
-import traceback
-
-
 # 120 is the amount of seconds to wait before each update.
 # This allow us to use the free Ubidots plan.
 INTERVAL_SECONDS = 120
@@ -36,8 +33,8 @@ def main():
         try:
             activity_variable.save_value({'value': busy_percent, 'timestamp': int(time.time())})
             print >> sys.stderr, 'Saved variable'
-        except:
-            print >> sys.stderr, 'Could not save variable'
+        except Exception, e:
+            print >> sys.stderr, 'Could not save variable. Exception:', str(e)
     return 0 # Never reached.
 
 if __name__ == "__main__":
