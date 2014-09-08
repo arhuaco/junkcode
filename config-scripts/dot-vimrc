@@ -12,6 +12,7 @@ runtime! debian.vim
 " I like this color scheme.
 " colorscheme evening
 
+set ruler
 set ai
 syntax on
 
