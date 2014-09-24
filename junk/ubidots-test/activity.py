@@ -18,7 +18,7 @@ def main():
     api_key = sys.argv[1]
     api = ApiClient(api_key)
     try:
-        activity_variable = api.get_variable('5403aaa0762542222dd0d025')
+        activity_variable = api.get_variable('542268a276254253d58c9406')
     except Exception, e:
         print >> sys.stderr, 'Exception:', str(e)
         print >> sys.stderr, 'Could not open variable'
