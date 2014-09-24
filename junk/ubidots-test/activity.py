@@ -18,7 +18,7 @@ def main():
     api_key = sys.argv[1]
     api = ApiClient(api_key)
     try:
-        activity_variable = api.get_variable('542268a276254253d58c9406')
+        activity_variable = api.get_variable('54226bee76254255be3092ce')
     except Exception, e:
         print >> sys.stderr, 'Exception:', str(e)
         print >> sys.stderr, 'Could not open variable'
@@ -31,7 +31,7 @@ def main():
         busy_percent = busy_sum / INTERVAL_SECONDS
         print >> sys.stderr, busy_percent
         try:
-            activity_variable.save_value({'value': busy_percent})
+            activity_variable.save_values([{'timestamp': int(time.time()), 'value': busy_percent}])
             print >> sys.stderr, 'Saved variable'
         except Exception, e:
             print >> sys.stderr, 'Could not save variable. Exception:', str(e)
