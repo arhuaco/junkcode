@@ -31,7 +31,7 @@ def main():
         busy_percent = busy_sum / INTERVAL_SECONDS
         print >> sys.stderr, busy_percent
         try:
-            activity_variable.save_value({'value': busy_percent, 'timestamp': int(time.time())})
+            activity_variable.save_value({'value': busy_percent})
             print >> sys.stderr, 'Saved variable'
         except Exception, e:
             print >> sys.stderr, 'Could not save variable. Exception:', str(e)
