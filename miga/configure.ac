@@ -1,6 +1,10 @@
-AC_INIT(src/miga.h)
-AM_INIT_AUTOMAKE(miga, 0.1)
-AM_CONFIG_HEADER(src/config.h)
+AC_INIT(miga, 0.1)
+AC_CONFIG_SRCDIR(src/miga.h)
+AM_INIT_AUTOMAKE
+
+AC_CONFIG_HEADERS(src/config.h)
+
+AC_CONFIG_MACRO_DIR([m4])
 
 dnl Checks for programs.
 AC_PROG_LIBTOOL
@@ -8,9 +12,6 @@ AC_PROG_CC
 AC_PROG_AWK
 AC_PROG_INSTALL
 AC_PROG_LN_S 
-
-dnl Checks for libraries.
-dnl AC_CHECK_LIB(m, ceil)
 
 dnl Checks for header files.
 AC_HEADER_STDC
