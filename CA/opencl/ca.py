@@ -3,8 +3,12 @@ import pyopencl as cl
 import sys
 
 N = 32
+
 a_np = np.zeros((N,),  dtype=np.int32)
 b_np = np.zeros((N,),  dtype=np.int32)
+
+a_np[5] = 1
+b_np[5] = 1
 
 ctx = cl.create_some_context()
 queue = cl.CommandQueue(ctx)
@@ -22,7 +26,10 @@ __kernel void sum(__global const int *a_g, __global const int *b_g, __global int
 
 res_g = cl.Buffer(ctx, mf.WRITE_ONLY, a_np.nbytes)
 prg.sum(queue, a_np.shape, None, a_g, b_g, res_g)
+
+# FIX
 #res_np = np.empty_like(a_np)
+
 res_np = np.zeros((N,),  dtype=np.int32)
 print(res_np)
 cl.enqueue_copy(queue, res_np, res_g)
