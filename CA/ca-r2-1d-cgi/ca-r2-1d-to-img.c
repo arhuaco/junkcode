@@ -18,18 +18,19 @@ void getenv_char (char **var, char *name);
 int
 main (int argc, char *argv[])
 {
-  CA *ca;  
-  
+  CA *ca;
+
   unsigned int rule = 3133097257u;
   unsigned int width = 512, height = 256;
   int row;
-  
+
   gdImagePtr im;
   FILE *pngout;
   int   pngout_close = 0;
   char *filename;
   int   filename_free = 0;
-  int black, white;
+  int black;
+  int white;
 
   unsigned int seed;
   char *initial;
@@ -42,7 +43,7 @@ main (int argc, char *argv[])
   getenv_uint(&rule, "CA_RULE");
   getenv_uint(&width, "CA_WIDTH");
   getenv_uint(&height, "CA_HEIGHT");
-  
+
   if (width > MAX_WIDTH)
     width = MAX_WIDTH;
 
@@ -83,13 +84,15 @@ main (int argc, char *argv[])
 
     for (col = 0; col < width; col ++)
       if (ca_cell_get(ca, col))
-        gdImageSetPixel(im, col, row, black); 
+        gdImageSetPixel(im, col, row, black);
+      else
+        gdImageSetPixel(im, col, row, white);
 
     ca_iterate(ca, 1);
   }
-  
+
   filename = getenv("CA_FILE");
-  
+
   if (filename && !strncmp("stdout", filename, 7))
     pngout = stdout;
   else
@@ -97,7 +100,7 @@ main (int argc, char *argv[])
     if (!filename)
     {
       int size = 32;
-    
+
       MALLOC(filename, size);
       filename_free = 1;
 
@@ -119,7 +122,7 @@ main (int argc, char *argv[])
 
   if (pngout_close)
     fclose(pngout);
-  
+
   gdImageDestroy(im);
 
   if (filename_free)
@@ -144,7 +147,7 @@ getenv_uint(unsigned int *var, char *name)
     unsigned long int num;
 
     num = strtoul(str, &strend, 10);
-    
+
     if (!(*strend))
       *var = num;
   }
