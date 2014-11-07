@@ -7,8 +7,8 @@ N = 32
 a_np = np.zeros((N,),  dtype=np.int32)
 b_np = np.zeros((N,),  dtype=np.int32)
 
-a_np[5] = 1
-b_np[5] = 1
+a_np[N / 2] = 1
+b_np[N / 2] = 1
 
 ctx = cl.create_some_context()
 queue = cl.CommandQueue(ctx)
@@ -31,7 +31,6 @@ prg.sum(queue, a_np.shape, None, a_g, b_g, res_g)
 #res_np = np.empty_like(a_np)
 
 res_np = np.zeros((N,),  dtype=np.int32)
-print(res_np)
 cl.enqueue_copy(queue, res_np, res_g)
 
 # Check on CPU with Numpy:
