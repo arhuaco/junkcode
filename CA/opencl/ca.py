@@ -24,7 +24,8 @@ __kernel void ca_1d_r2_step(__global const int *input, __global int *output, con
 ''').build()
 
 res_g = cl.Buffer(ctx, mf.WRITE_ONLY, a_np.nbytes)
-res_np = np.zeros((N,),  dtype=np.int32)
+res_np = np.empty_like(a_np)
+
 for _ in range(64):
   prg.ca_1d_r2_step(queue, a_np.shape, None, a_g, res_g, np.int32(N), np.uint32(3133097257)) # It's important to send the rule as unsigned.
   cl.enqueue_copy(queue, res_np, res_g)
@@ -33,8 +34,3 @@ for _ in range(64):
     s += 'O' if res_np[i] else ' '
   print(s)
   a_g, res_g = res_g, a_g
-# FIX
-#res_np = np.empty_like(a_np)
-# Do not zero.
-
-# Check on CPU with Numpy:
