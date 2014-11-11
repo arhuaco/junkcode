@@ -14,7 +14,6 @@ queue = cl.CommandQueue(ctx)
 mf = cl.mem_flags
 a_g = cl.Buffer(ctx, mf.READ_ONLY | mf.COPY_HOST_PTR, hostbuf=a_np)
 
-
 prg = cl.Program(ctx, '''
 __kernel void ca_1d_r2_step(__global const int *input, __global int *output, const int N, const unsigned int rule) {
   int gid = get_global_id(0);
