@@ -12,7 +12,7 @@ def get_digits(number):
         number //= 10
 
 def FindMatches():
-    # I din't user an upper bound. Check the thread for them.
+    # I din't user an upper bound. Check the thread for ideas once you solve the problem.
     for num in range(3,10000000000):
         fact_sum = 0
         for digit in get_digits(num):
