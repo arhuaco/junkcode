@@ -8,14 +8,14 @@ def is_pantidigital(number):
         number //= 10
     return sum(bitmap[1:]) == 9
 
-candidates = set()
+answer = -1
 for i in range(1, 100000):
     j = 1
     to_test = ''
     while len (to_test) < 9:
         to_test += str(i * j)
         if len(to_test) == 9 and is_pantidigital(int(to_test)) and j > 1:
-            candidates.add(int(to_test))
+            answer = max(answer, int(to_test))
         j += 1
 
-print('A:{}'.format(max(candidates)))
+print('A:{}'.format(answer))
