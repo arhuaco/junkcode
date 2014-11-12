@@ -1,7 +1,3 @@
-# Solve problem 38. Not using an upper bound.
-
-import sys
-
 def is_pantidigital(number):
     bitmap = [0] * 10
     while number > 0:
@@ -20,7 +16,6 @@ for i in range(1, 100000):
         to_test += str(i * j)
         if len(to_test) == 9 and is_pantidigital(int(to_test)) and j > 1:
             candidates.add(int(to_test))
-            print(i, int(to_test), max(candidates))
         j += 1
 
 print('A:{}'.format(max(candidates)))
