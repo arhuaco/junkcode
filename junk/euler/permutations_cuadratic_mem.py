@@ -1,4 +1,4 @@
-''' Prints all permutations. Not in lexicografic order. Uses cuadratic memory! '''
+''' Prints all permutations. Not in lexicographic order. Uses cuadratic memory! '''
 def Permutations(vec):
     if len(vec) <= 1:
         yield vec
