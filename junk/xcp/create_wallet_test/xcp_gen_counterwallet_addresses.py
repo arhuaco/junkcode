@@ -4,7 +4,7 @@
 #
 # https://github.com/rippler/CounterWalletHelper/blob/master/CounterWalletHelper.py
 # by Nelson Castillo
-# with help from Andres Velasquez (Andres F Velasquez <velasquez.af@gmail.com>).
+# with help from Andres Velasquez (<velasquez.af@gmail.com>).
 #
 # Please go to https://github.com/rippler/CounterWalletHelper for the original Python 2 code.
 
