@@ -1,3 +1,13 @@
+# Generate Counterparty keys from passphrase. Python 3.
+#
+# Adapted from:
+#
+# https://github.com/rippler/CounterWalletHelper/blob/master/CounterWalletHelper.py
+# by Nelson Castillo
+# with help from Andres Velasquez (Andres F Velasquez <velasquez.af@gmail.com>).
+#
+# Please go to https://github.com/rippler/CounterWalletHelper for the original Python 2 code.
+
 from word_list import mnemonic_word_list
 
 from binascii import unhexlify
