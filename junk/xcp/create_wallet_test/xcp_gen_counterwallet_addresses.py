@@ -1,4 +1,4 @@
-# Generate Counterparty keys from passphrase. Python 3.
+# Generate Counterwallet keys from passphrase. Python 3.
 #
 # Adapted from:
 #
