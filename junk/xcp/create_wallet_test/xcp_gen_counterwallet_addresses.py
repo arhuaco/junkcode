@@ -41,7 +41,7 @@ def get_keys(pass_phrase, depth, testnet):
     step1 = _makeSeed(pass_phrase)
     step2 = _toHex(step1)
     step4 = unhexlify(step2)
-    vbytes = vbytes = bitcoin.TESTNET_PRIVATE if testnet else bitcoin.MAINNET_PRIVATE
+    vbytes = bitcoin.TESTNET_PRIVATE if testnet else bitcoin.MAINNET_PRIVATE
     master = bitcoin.bip32_master_key(step4, vbytes)
     external = bitcoin.bip32_ckd(master, 2**31 + 0) # hardened
     external = bitcoin.bip32_ckd(external, 0)
