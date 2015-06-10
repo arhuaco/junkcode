@@ -2,7 +2,7 @@
 
 import random
 
-NREG = 6
+NREG = 2
 
 def get_program(random_body):
     ' Get the random body to use. '
@@ -28,7 +28,8 @@ def get_uint_var():
 
 def get_uint_slot():
     ' Get one of the storage slot. '
-    return random.choice(['r0', 'r1', 'r2', 'r3', 'r4', 'r5'])
+    assert NREG > 0
+    return 'r{}'.format(random.randint(0, NREG - 1))
 
 def get_uint_op():
     ' Get an operator '
