@@ -32,7 +32,7 @@ def get_uint_slot():
 
 def get_uint_op():
     ' Get an operator '
-    return random.choice(['+', '-'])
+    return random.choice(['+']) # Trying something simple first.
 
 def gen_expression(max_depth):
     ' Get a random expression. '
