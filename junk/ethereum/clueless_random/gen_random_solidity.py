@@ -2,7 +2,7 @@
 
 import random
 
-NREG = 2
+NREG = 20
 
 def get_program(random_body):
     ' Get the random body to use. '
@@ -33,7 +33,7 @@ def get_uint_slot():
 
 def get_uint_op():
     ' Get an operator '
-    return random.choice(['+']) # Trying something simple first.
+    return random.choice(['+', '*'])
 
 def gen_expression(max_depth):
     ' Get a random expression. '
@@ -48,7 +48,7 @@ def gen_iteration():
     exp = ''
     for idx in range(NREG):
         reg_name = 'r{}'.format(idx % NREG)
-        exp += '{} = {};'.format(reg_name, gen_expression(2))
+        exp += '{} = {};'.format(reg_name, gen_expression(4))
     return exp
 
 print(get_program(gen_iteration()))
