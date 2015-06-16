@@ -11,7 +11,7 @@ def get_program(random_body):
     for idx in range(NREG):
         registers += 'uint r{} = 1;'.format(idx)
 
-    return '''contract SimpleStorage { REGISTERS uint[2**20] store; function iterate() { RANDOM_BODY }}'''.replace('RANDOM_BODY', random_body).replace('REGISTERS', registers)
+    return '''contract SimpleStorage { REGISTERS uint[2**64] store; function iterate() { RANDOM_BODY }}'''.replace('RANDOM_BODY', random_body).replace('REGISTERS', registers)
 
 def get_uint_var():
     ' Get a variable uint.'
@@ -49,7 +49,7 @@ def gen_iteration():
     for idx in range(NREG):
         reg_name = 'r{}'.format(idx % NREG)
         exp += '{} = {};'.format(reg_name, gen_expression(3))
-        exp += 'store[({} + 1) % (2 ** 20)] = {};'.format(reg_name, reg_name)
+        exp += 'store[({} + 1) % (2 ** 64)] = {};'.format(reg_name, reg_name)
     return exp
 
 print(get_program(gen_iteration()))
