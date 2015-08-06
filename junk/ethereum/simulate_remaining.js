@@ -21,7 +21,7 @@ function Simulate(){
 
     console.log('Voting up: ' + n_inc);
     console.log('Voting down: ' + n_dec);
-    console.log('Simulating... Using a line would be enough.');
+    console.log('Simulating...');
 
     function simulate_once(start) {
         var blocks_remaining = 0;
