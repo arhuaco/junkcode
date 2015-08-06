@@ -23,18 +23,28 @@ function Simulate(){
     console.log('Votoing down: ' + n_dec);
     console.log('Simulating... Using a line would be enough.');
 
-    var blocks_remaining = 0;
-    while (current < 21000) {
-        var delta = current / 1024;
-        if (Math.random() < n_dec / n_inc) {
-            current -= delta;
-        } else {
-            current += delta;
-        }
-        current = Math.max(5000, current);
-        blocks_remaining += 1;
+    function simulate_once(start) {
+        var blocks_remaining = 0;
+        var current = start;
+        while (current < 21000) {
+            var delta = current / 1024;
+            if (Math.random() < n_dec / n_inc) {
+                current -= delta;
+            } else {
+                current += delta;
+            }
+            current = Math.max(5000, current);
+           blocks_remaining += 1;
+       }
+       return blocks_remaining;
     }
-    console.log('Blocks remaining: ' + blocks_remaining);
+    var n_times = 10;
+    var total = 0;
+    for (i = 0; i < n_times; ++i) {
+        total += simulate_once(current);
+    }
+    var blocks_remaining = total / n_times;
+    console.log('Blocks remaining(estimated): ' + Math.floor(blocks_remaining));
     console.log('Hours remaining: ' + (blocks_remaining / 4 / 60));
 }
 Simulate()
