@@ -20,7 +20,7 @@ function Simulate(){
      }
 
     console.log('Voting up: ' + n_inc);
-    console.log('Votoing down: ' + n_dec);
+    console.log('Voting down: ' + n_dec);
     console.log('Simulating... Using a line would be enough.');
 
     function simulate_once(start) {
