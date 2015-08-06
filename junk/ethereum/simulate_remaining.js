@@ -19,8 +19,8 @@ function Simulate(){
         prev = current;
      }
 
-    console.log('Voting up: ' + n_inc);
-    console.log('Voting down: ' + n_dec);
+    console.log('Voting up: ' + (100 * n_inc / lookback) + '%');
+    console.log('Voting down: ' + (100 * n_dec / lookback) + '%');
     console.log('Simulating...');
 
     function simulate_once(start) {
