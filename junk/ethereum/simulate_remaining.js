@@ -5,8 +5,8 @@ function Simulate(){
     var n_inc = 0;
     var n_dec = 0;
 
-    console.log('Looking back 10 minutes (Approx 40 blocks)');
-    lookback = 40;
+    console.log('Looking back 20 minutes (Approx 80 blocks)');
+    lookback = 80;
     var prev = eth.getBlock(latest - lookback).gasLimit
     var current;
     for (i = latest - lookback + 1; i <= latest; i++){
@@ -16,6 +16,7 @@ function Simulate(){
         } else {
             ++n_dec;
         }
+        prev = current;
      }
 
     console.log('Voting up: ' + n_inc);
@@ -26,9 +27,9 @@ function Simulate(){
     while (current < 21000) {
         var delta = current / 1024;
         if (Math.random() < n_dec / n_inc) {
-            current = current - delta;
+            current -= delta;
         } else {
-            current = current + delta;
+            current += delta;
         }
         current = Math.max(5000, current);
         blocks_remaining += 1;
