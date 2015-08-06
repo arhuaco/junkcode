@@ -7,7 +7,7 @@ function Simulate(){
 
     console.log('Looking back 10 minutes (Approx 40 blocks)');
     lookback = 40;
-    var prev = eth.getBlock(latest - lookback).gasLimit
+    var prev = eth.getBlock(latest - lookback).gasLimit;
     var current;
     for (i = latest - lookback + 1; i <= latest; i++){
         current = eth.getBlock(i).gasLimit;
