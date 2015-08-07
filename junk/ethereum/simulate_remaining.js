@@ -19,7 +19,7 @@ function Simulate(){
         prev = current;
      }
 
-    console.log('Current gas limit (need 21000): ' + current.toFixed(4));
+    console.log('Current gas limit (need 105000 for 5 txs/block): ' + current.toFixed(4));
     console.log('Voting up: ' + (100 * n_inc / lookback).toFixed(3) + '%');
     down_percent = 100 * n_dec / lookback;
     console.log('Voting down: ' + down_percent.toFixed(3) + '%');
@@ -35,7 +35,7 @@ function Simulate(){
     function simulate_once(start) {
         var blocks_remaining = 0;
         var current = start;
-        while (current < 21000) {
+        while (current < 21000 * 5) {
             var delta = current / 1024;
             if (Math.random() < n_dec / n_inc) {
                 current -= delta;
