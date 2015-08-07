@@ -19,7 +19,7 @@ function Simulate(){
         prev = current;
      }
 
-    console.log('Current gas limit: ' + current.toFixed(4));
+    console.log('Current gas limit (need 21000): ' + current.toFixed(4));
     console.log('Voting up: ' + (100 * n_inc / lookback).toFixed(3) + '%');
     down_percent = 100 * n_dec / lookback;
     console.log('Voting down: ' + down_percent.toFixed(3) + '%');
