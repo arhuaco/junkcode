@@ -42,7 +42,7 @@ function Simulate(){
                 current += delta;
             }
             current = Math.max(5000, current);
-           blocks_remaining += 1;
+            blocks_remaining += 1;
        }
        return blocks_remaining;
     }
