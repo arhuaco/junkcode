@@ -5,9 +5,9 @@ function Simulate(){
     var n_inc = 0;
     var n_dec = 0;
 
-    console.log('Looking back 10 minutes (Approx 40 blocks)');
-    lookback = 40;
-    var prev = eth.getBlock(latest - lookback).gasLimit;
+    console.log('Looking back 30 minutes (Approx 120 blocks)');
+    lookback = 120;
+    var prev = eth.getBlock(latest - lookback).gasLimit
     var current;
     for (i = latest - lookback + 1; i <= latest; i++){
         current = eth.getBlock(i).gasLimit;
@@ -19,12 +19,12 @@ function Simulate(){
         prev = current;
      }
 
-    console.log('Voting up: ' + (100 * n_inc / lookback) + '%');
+    console.log('Voting up: ' + (100 * n_inc / lookback).toFixed(3) + '%');
     down_percent = 100 * n_dec / lookback;
-    console.log('Voting down: ' + down_percent + '%');
+    console.log('Voting down: ' + down_percent.toFixed(3) + '%');
 
     if (down_percent > 33.0) {
-        console.log('With > 33% voting down it takes a lot of time (more than 150 hours). Turn on miners with geth 1.0.1!');
+        console.log('With > 33% voting down it takes a lot of time (more than 150 hours). Turn on miners on with 1.0.1!');
         console.log('https://github.com/arhuaco/junkcode/blob/master/junk/ethereum/simulate_remaining.js');
         return;
     }
@@ -42,7 +42,7 @@ function Simulate(){
                 current += delta;
             }
             current = Math.max(5000, current);
-            blocks_remaining += 1;
+           blocks_remaining += 1;
        }
        return blocks_remaining;
     }
@@ -53,6 +53,6 @@ function Simulate(){
     }
     var blocks_remaining = total / n_times;
     console.log('Blocks remaining(estimated): ' + Math.floor(blocks_remaining));
-    console.log('Hours remaining: ' + (blocks_remaining / 4 / 60));
+    console.log('Hours remaining: ' + (blocks_remaining / 4 / 60).toFixed(3));
 }
 Simulate()
