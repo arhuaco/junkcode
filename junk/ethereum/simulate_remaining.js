@@ -24,7 +24,7 @@ function Simulate(){
     console.log('Voting down: ' + down_percent + '%');
 
     if (down_percent > 33.0) {
-        console.log('With > 33% voting down it takes a lot of time (more than 150 hours). Turn on miners on with 1.0.1!');
+        console.log('With > 33% voting down it takes a lot of time (more than 150 hours). Turn on miners with geth 1.0.1!');
         console.log('https://github.com/arhuaco/junkcode/blob/master/junk/ethereum/simulate_remaining.js');
         return;
     }
