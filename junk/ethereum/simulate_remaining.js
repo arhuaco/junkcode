@@ -43,9 +43,9 @@ function Simulate(){
                 current += delta;
             }
             current = Math.max(5000, current);
-           blocks_remaining += 1;
-       }
-       return blocks_remaining;
+            blocks_remaining += 1;
+        }
+        return blocks_remaining;
     }
     var n_times = 10;
     var total = 0;
