@@ -17,12 +17,6 @@ import math
 def mMod(a, b):
     return int(a  - math.floor(a/b)*b)
 
-def toHex(s):
-    seed = ''
-    for i in s:
-        seed += ('0'*8 + format(i, 'x'))[-8:]
-    return seed
-
 def makeSeed(phrase, words=None):
     if words is None:
         words = mnemonic_word_list
