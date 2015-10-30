@@ -12,14 +12,15 @@
 
 using namespace std;
 
-enum PlayerType {CITIZEN, MAFIA};
+enum PlayerType { CITIZEN, MAFIA };
 
 class MafiaGame {
-  enum TurnsType {DAY = 0, NIGHT};
+  enum TurnsType { DAY = 0, NIGHT };
+
  public:
-  MafiaGame(int n_players, int n_mafia) :
-    param_mafia_(n_mafia), param_citizen_(n_players - n_mafia) {
-    assert(param_mafia_> 0);
+  MafiaGame(int n_players, int n_mafia)
+      : param_mafia_(n_mafia), param_citizen_(n_players - n_mafia) {
+    assert(param_mafia_ > 0);
     assert(param_citizen_ > 0);
   }
 
@@ -60,7 +61,7 @@ class MafiaGame {
       // Let's start with a simulaion for simplicity. We should use better math.
       // No winners yet. Let's the voting begin.
       for (int who = 0; who < mafia + citizen; ++who) {
-        while(1) {
+        while (1) {
           int chosen = random_float() * (mafia + citizen);
           if (chosen == who) {
             // People don't vote for themselves
@@ -84,7 +85,8 @@ class MafiaGame {
         }
       }
       // Get the lynched player.
-      if (player[tied_votes[static_cast<int>(random_float() * n_tied)]] == MAFIA) {
+      if (player[tied_votes[static_cast<int>(random_float() * n_tied)]] ==
+          MAFIA) {
         --mafia;
       } else {
         --citizen;
@@ -94,27 +96,30 @@ class MafiaGame {
   }
 
  private:
-   double random_float() { return double(random()) / (double(RAND_MAX) + 1.0); }
-   // How many mafia players.
-   int param_mafia_;
-   // How many citizens.
-   int param_citizen_;
+  double random_float() { return double(random()) / (double(RAND_MAX) + 1.0); }
+  // How many mafia players.
+  int param_mafia_;
+  // How many citizens.
+  int param_citizen_;
 };
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   srandom(time(NULL));
   int mafia_wins = 0;
   int citizen_wins = 0;
-  MafiaGame game(7, 2);
+  MafiaGame game(
+      7 /* Number of players */,
+      2 /* Number of players who are part of the mafia/werewolves */);
   int turn = 1;
-  while(1) {
-     if (game.Play() == MAFIA) {
-       ++mafia_wins;
-     } else {
-       ++citizen_wins;
-     }
+  while (1) {
+    if (game.Play() == MAFIA) {
+      ++mafia_wins;
+    } else {
+      ++citizen_wins;
+    }
     if (turn % 1000000 == 0) {
-      cout << "Mafia wins " << (float(mafia_wins) / float(citizen_wins + mafia_wins)) << endl;
+      cout << "Mafia wins "
+           << (float(mafia_wins) / float(citizen_wins + mafia_wins)) << endl;
     }
     turn++;
   }
