@@ -10,6 +10,12 @@
 
 // This simulation approximates the results of the paper surprisingly well.
 
+// Parameters.
+
+// How maby players in the game?
+const int PARAM_N_PLAYERS = 7;
+const int PARAM_N_MAFIA = 2;
+
 using namespace std;
 
 enum PlayerType { CITIZEN, MAFIA };
@@ -96,6 +102,7 @@ class MafiaGame {
   }
 
  private:
+  // I know this RNG is not great.
   double random_float() { return double(random()) / (double(RAND_MAX) + 1.0); }
   // How many mafia players.
   int param_mafia_;
@@ -107,10 +114,9 @@ int main(int argc, char* argv[]) {
   srandom(time(NULL));
   int mafia_wins = 0;
   int citizen_wins = 0;
-  MafiaGame game(
-      7 /* Number of players */,
-      2 /* Number of players who are part of the mafia/werewolves */);
+  MafiaGame game(PARAM_N_PLAYERS, PARAM_N_MAFIA);
   int turn = 1;
+  cout << "This will run forever, with time better approximations are reached." << endl;
   while (1) {
     if (game.Play() == MAFIA) {
       ++mafia_wins;
@@ -118,7 +124,7 @@ int main(int argc, char* argv[]) {
       ++citizen_wins;
     }
     if (turn % 1000000 == 0) {
-      cout << "Mafia wins "
+      cout << "Will the mafia win? Probability: "
            << (float(mafia_wins) / float(citizen_wins + mafia_wins)) << endl;
     }
     turn++;
