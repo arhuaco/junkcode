@@ -116,7 +116,10 @@ int main(int argc, char* argv[]) {
   int citizen_wins = 0;
   MafiaGame game(PARAM_N_PLAYERS, PARAM_N_MAFIA);
   int turn = 1;
-  cout << "This will run forever, with time better approximations are reached." << endl;
+  cout << "This will run forever, with time better approximations are reached."
+       << endl;
+  cout << "Players: " << PARAM_N_PLAYERS << " Mafia size: " << PARAM_N_MAFIA
+       << endl;
   while (1) {
     if (game.Play() == MAFIA) {
       ++mafia_wins;
