@@ -6,17 +6,12 @@ import pprint
 
 def process(file_name):
     with open(file_name) as csv_file:
-        for the_header in csv.reader(csv_file, delimiter=';'):
-            break # Saving header. TODO(nel): Is there a better way to do this?
-
-    with open(file_name) as csv_file:
         reader = csv.DictReader(csv_file, delimiter=';')
         result = {}
         for row in reader:
             for column, value in row.iteritems():
                 result.setdefault(column, []).append(value)
-    writer = csv.DictWriter(open('out.txt', 'w'), fieldnames=the_header)
-    writer.writeheader()
+    pprint.pprint(result)
 
 def main():
     process('total.csv')
