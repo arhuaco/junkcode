@@ -2,12 +2,16 @@
 
 import pydot
 import csv
+import pprint
 
 def main():
-    tree = pydot.graph_from_dot_data(open('ModeloB.dot').read())
     with open('total.csv') as csv_file:
-         for row in csv.reader(csv_file):
-             print ', '.join(row)
+        reader = csv.DictReader(csv_file, delimiter=';')
+        result = {}
+        for row in reader:
+            for column, value in row.iteritems():
+                result.setdefault(column, []).append(value)
+    pprint.pprint(result)
 
 if __name__ == "__main__":
     # execute only if run as a script.
