@@ -23,9 +23,6 @@ def eval_tree(tree, inputs, root_node_name):
             return eval_tree(tree, inputs, edge.get_destination())
     assert False
 
-    #print edge
-    #print root, edge
-
 def process_inputs(data_file, graph_file, root_node_name, csv_row_id):
     ' Read a decision graph and a CSV file with values for tree evaluation. '
     # The tree.
