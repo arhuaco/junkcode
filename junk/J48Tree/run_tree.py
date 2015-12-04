@@ -1,5 +1,8 @@
 ' Run a decision tree. Python 2.7! Legacy code... '
 
+# TODO(nel): This is slow. Track what is happening. I guess that
+# tree.get_edges() is being called too much. But it does not make sense.
+
 import pydot
 import csv
 import pprint
