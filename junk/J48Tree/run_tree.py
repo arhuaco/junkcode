@@ -4,41 +4,47 @@ import pydot
 import csv
 import pprint
 
-def get_label():
-    pass
-
 def resolve_variable(node_or_edge, inputs):
     ' Get the value of a variable of the model. '
     var_name = node_or_edge.get_label()[1:-1]
-    return var_name
+    if var_name in inputs:
+        return True, inputs[var_name]
+    return False, var_name
 
 def eval_tree(tree, inputs, root_node_name):
-    root_val  = resolve_variable(tree.get_node(root_node_name)[0])
+    ' Evaluate the tree. '
+    root_node = tree.get_node(root_node_name)[0]
+    lookup_result, root_val = resolve_variable(root_node, inputs)
+    if not lookup_result:
+        return root_val
     for edge in [e for e in tree.get_edges() if e.get_source() == root_node_name]:
-        #print edge.get_destination()
-        #print edge.get_label()
-        print root_val + edge.get_label()[1:-1]
+        # Evaluate the condition. If true, descend in this branch if True.
+        if eval(root_val + edge.get_label()[1:-1]):
+            return eval_tree(tree, inputs, edge.get_destination())
+    assert False
+
     #print edge
     #print root, edge
 
-def process_inputs(data_file, graph_file, root_node_name):
+def process_inputs(data_file, graph_file, root_node_name, csv_row_id):
     ' Read a decision graph and a CSV file with values for tree evaluation. '
-    # First, read the variables open(data_file) as csv_file:
+    # The tree.
+    tree = pydot.graph_from_dot_data(open(graph_file).read())
+    # Read the variables.
+    result = {}
     with open(data_file) as csv_file:
-        reader = csv.DictReader(csv_file, delimiter=';')
-        inputs  = {}
-        for row in reader:
-            for column, value in row.iteritems():
-                inputs.setdefault(column, []).append(value)
-        #return
-        #tree = pydot.graph_from_dot_data(open(graph_file).read())
-        # Evaluate the graph
-        #result = eval_tree(tree=tree, inputs=inputs, root_node_name=root_node_name)
+        for variables in csv.DictReader(csv_file, delimiter=';'):
+            result[variables[csv_row_id]] = eval_tree(tree=tree, inputs=variables, root_node_name=root_node_name)
+    return result
+
 
 def main():
-    process_inputs(data_file='total.csv',
-                   graph_file='ModeloB.dot',
-                   root_node_name='N0')
+    ' Our main function. '
+    result =process_inputs(data_file='total.csv',
+                           graph_file='ModeloB.dot',
+                          root_node_name='N0',
+                          csv_row_id='Fecha')
+    pprint.pprint(result)
 
 if __name__ == "__main__":
     # execute only if run as a script.
