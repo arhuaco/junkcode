@@ -1,6 +1,6 @@
-AC_INIT(src/tamal.h)
-AM_INIT_AUTOMAKE(tamal, 0.1)
-AM_CONFIG_HEADER(src/config.h)
+AC_INIT([tamal], [0.1], [nesoneci@gmail.com])
+AM_INIT_AUTOMAKE
+AC_CONFIG_HEADER(src/config.h)
 
 dnl Checks for programs.
 AC_PROG_CC
