@@ -1,3 +1,5 @@
+Move to Cmake.
+
 To do:
 - Fix the bug with the custom version of cons, car and cdr. See examles.scm inside doc/.
 - you could use zero as a return value for error. Right now it's slow.
