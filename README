@@ -1,13 +1,12 @@
-Hello.
+The name "JunkCode" is inspired by this talk:
 
-This is my junk code.
+http://samba.org/ftp/tridge/talks/junkcode.pdf .
+
+This is my junkcode directory.
 
 Code that I write but that is not released as a full program.
 
-Mostly useless snippets for testing purposes.
+Mostly code snippets for testing purposes (Algorithms, languages, libraries, etc).
 
 Nelson Castillo.
 nelsoneci@gmail.com
-
-The name "Junk Code" is inspired by this talk:
-http://samba.org/ftp/tridge/talks/junkcode.pdf .
