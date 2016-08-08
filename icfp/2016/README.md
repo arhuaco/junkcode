@@ -13,7 +13,7 @@ made things difficult for us. Also, only one team member could work full time.
 
 # How did we do?
 
-Our rank at freeze time was 70. A race about not being last :-P So we tried to send as many solutions as we could with a simple algorithm.
+Our [rank at freeze time was 70](http://2016sv.icfpcontest.org/leaderboard). A race about not being last :-P So we tried to send as many solutions as we could with a simple algorithm.
 The algorithm only folds in halves to get a rectangle that encircles the silhouette.
 
 ![Simple strategy](https://raw.githubusercontent.com/arhuaco/junkcode/master/icfp/2016/src/simple_binary_fold.png "Just fold in halves")
@@ -22,7 +22,7 @@ We didn't get a geisha drone and it would have been very useful.
 The math behind this problem is very interesting.
 
 Unfortunately, there was a 1-line bug in an [utility program](src/prune_rate_limit.py) for the *smart* submitter that made us submit solutions for only about half of the problems
-and not for them all. Bummer!
+and not for them all. **Bummer!**
 
 ## Simple algorithm performance (on average 21.64% for each problem).
 
