@@ -1,4 +1,4 @@
-' Submission system '
+' Make sure we send solutions again when we need to retry due to API limits '
 
 import glob
 import json
