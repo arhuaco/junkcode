@@ -21,7 +21,7 @@ The algorithm only folds in halves to get a rectangle that encircles the silhoue
 We didn't get a geisha drone and it would have been very useful.
 The math behind this problem is very interesting.
 
-Unfortunately, there was a 1-line bug in the *smart* submitter that made us submit solutions for about half of the problems
+Unfortunately, there was a 1-line bug in an [auxiliar program](src/prune_rate_limit.py) for the *smart* submitter that made us submit solutions for only about half of the problems
 and not for them all. Bummer!
 
 ## Simple algorithm performance (on average 21.64% for each problem).
