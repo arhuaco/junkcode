@@ -34,7 +34,7 @@ and not for them all. **Bummer!** Nelson's fault.
 
 On average a score of 21.64% for each problem. Not too bad for such a [simple approach](src/binary_solver.py).
 
-In the following list we have : score, number of problems, percent of submissions.
+In the following list we have : score, number of solutions sent, percent of submissions.
 
 - >= 0.00 1459 100.0%
 - >= 0.10 1184 81.15%
