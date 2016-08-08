@@ -24,7 +24,9 @@ The math behind this problem is very interesting.
 Unfortunately, there was a 1-line bug in an [utility program](src/prune_rate_limit.py) for the *smart* submitter that made us submit solutions for only about half of the problems
 and not for them all. **Bummer!**
 
-## Simple algorithm performance (on average 21.64% for each problem).
+## Simple algorithm performance
+
+On average 21.64% for each problem.
 
 In the following list we have : score, number of problems, percent of submissions.
 
