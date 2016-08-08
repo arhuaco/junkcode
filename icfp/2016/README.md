@@ -42,11 +42,14 @@ In the following list we have : score, number of problems, percent of submission
 
 # Code
 
-- Problem creator (src/grid_generator_affine.py)
-- Problem downloader (src/snapshot_sync.py)
-- Solution submitter (src/solve_pending.py)
-- Basic solver that only folds in halves to make rectangles (binary_solver.py)
+[](other_file.md)
+
+- [Trivial binary solver] (src/binary_solver.py)
+- [Problem creator](src/grid_generator_affine.py)
+- [Problem downloader] (src/snapshot_sync.py)
+- [Solution submitter] (src/solve_pending.py)
+
+# Final words
 
 And that was it. Thanks to the organizers. We need to study more math :-)
-
 The submission system was impressive. Kudos to the organizers for this.
