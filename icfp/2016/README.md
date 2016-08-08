@@ -11,6 +11,10 @@
 We had fun. Our math guy (Luis Carvajal) had a few issues at home so this
 made things difficult for us. Also, only one team member could work full time.
 
+# The task
+
+The contest was about doing Origami. A very interesting problem: [Task in PDF](doc/TaskDescription.pdf).
+
 # How did we do?
 
 Our [rank at freeze time was 70](http://2016sv.icfpcontest.org/leaderboard). A race about not being last :-P So we tried to send as many solutions as we could with a simple algorithm.
@@ -21,12 +25,12 @@ The algorithm only folds in halves to get a rectangle that encircles the silhoue
 We didn't get a geisha drone and it would have been very useful.
 The math behind this problem is very interesting.
 
-Unfortunately, there was a 1-line bug in an [utility program](src/prune_rate_limit.py) for the *smart* submitter that made us submit solutions for only about half of the problems
-and not for them all. **Bummer!**
+Unfortunately, there was a 1-line bug in an [utility program](src/prune_rate_limit.py) for the *smart* submitter system that made us submit solutions for only about half of the problems
+and not for them all. **Bummer!** Nelson's fault.
 
 ## Simple algorithm performance
 
-On average 21.64% for each problem.
+On average 21.64% for each problem. Not too bad for such a simple approach.
 
 In the following list we have : score, number of problems, percent of submissions.
 
