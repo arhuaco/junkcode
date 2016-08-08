@@ -30,7 +30,7 @@ and not for them all. **Bummer!** Nelson's fault.
 
 ## Simple algorithm performance
 
-On average 21.64% for each problem. Not too bad for such a simple approach.
+On average a score of 21.64% for each problem. Not too bad for such a simple approach.
 
 In the following list we have : score, number of problems, percent of submissions.
 
