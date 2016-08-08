@@ -9,7 +9,9 @@
 - Vera Mazhuga
 
 We had fun. Our math guy (Luis Carvajal) had a few issues at home so this
-made things difficult for us. Also, only one team member could work full time.
+made things difficult for us. Also, only one team member could work full time and the rest didn't have a lot of availability.
+Next year they all should take vacations :-)
+
 
 # The task
 
