@@ -105,7 +105,7 @@ class BinarySolver:
                     print('{},{}'.format(x_point, y_point), file=output_file)
 
             # Now print the facets. Let's compute them first because we don't have
-            # a heuristic to know how many of them are there yet.
+            # a formula to know how many of them are there yet.
             facets = []
             for y_c in range(len(computed_y) - 1): # -1!
                 for x_c in range(len(computed_x) - 1): # -1!
