@@ -28,7 +28,7 @@ We didn't get a geisha drone and it would have been very useful.
 The math behind this problem is very interesting.
 
 Unfortunately, there was a 1-line bug in an [utility program](src/prune_rate_limit.py) for the *smart* submitter system that made us submit solutions for only about half of the problems
-and not for them all. **Bummer!** Nelson's fault.
+and not for them all. **Bummer!** Nelson's fault. It had to do with cleaning solutions that couldn't been sent because rate limits of the contest's API.
 
 ## Simple algorithm performance
 
