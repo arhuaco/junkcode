@@ -19,7 +19,7 @@ The contest was about doing Origami. A very interesting problem: [Task in PDF](d
 
 # How did we do?
 
-Our [rank at freeze time was 70](http://2016sv.icfpcontest.org/leaderboard). A race about not being last :-P So we tried to send as many solutions as we could with a simple algorithm.
+Our [rank at freeze time was 70](http://2016sv.icfpcontest.org/leaderboard). Now we have to wait for the final scores. A race about not being last :-P So we tried to send as many solutions as we could with a simple algorithm.
 The algorithm only folds in halves to get a rectangle that encircles the silhouette.
 
 ![Simple strategy](https://raw.githubusercontent.com/arhuaco/junkcode/master/icfp/2016/src/simple_binary_fold.png "Just fold in halves")
@@ -36,17 +36,17 @@ On average a score of 21.64% for each problem. Not too bad for such a [simple ap
 
 In the following list we have : score, number of solutions sent, percent of submissions.
 
-- >= 0.00 1459 100.0%
-- >= 0.10 1184 81.15%
-- >= 0.20 821 56.27%
-- >= 0.30 371 25.420%
-- >= 0.40 88 6.031%
-- >= 0.50 22 1.51%
-- >= 0.60 8 0.54%
-- >= 0.70 5 0.34%
-- >= 0.80 3 0.20%
-- >= 0.90 3 0.20%
-- >= 1.00 2 0.13%
+- >= 0.0 1459 100.0%
+- >= 0.1 1184 81.15%
+- >= 0.2 821 56.27%
+- >= 0.3 371 25.420%
+- >= 0.4 88 6.031%
+- >= 0.5 22 1.51%
+- >= 0.6 8 0.54%
+- >= 0.7 5 0.34%
+- >= 0.8 3 0.20%
+- >= 0.9 3 0.20%
+- >= 1.0 2 0.13%
 
 # Code
 
