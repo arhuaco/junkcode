@@ -17,3 +17,5 @@ set (tamal_hdr
 include_directories(.)
 
 add_executable (tamal ${tamal_src} ${tam_hdr})
+
+install(TARGETS tamal DESTINATION bin)
