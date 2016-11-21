@@ -16,23 +16,17 @@ def main():
         print('It seems you have already initialized the system.')
         return 1
 
-    secret_file = open(SECRET_FILE, 'w')
-    public_file = open(PUBLIC_FILE, 'w')
-    addres_file = open(ADDRESS_FILE, 'w')
-
     priv = bitcoin.encode_privkey(bitcoin.random_key(), 'wif')
+    with open(SECRET_FILE, 'w') as secret_file:
+        secret_file.write(priv)
+
     pub = bitcoin.privtopub(priv)
+    with open(PUBLIC_FILE, 'w') as public_file:
+        public_file.write(pub)
 
     address = bitcoin.pubtoaddr(pub, 0)
-
-    secret_file.write(priv)
-    secret_file.close()
-
-    public_file.write(pub)
-    public_file.close()
-
-    addres_file.write(address)
-    addres_file.close()
+    with open(ADDRESS_FILE, 'w') as addres_file:
+        addres_file.write(address)
 
     print('Generated {} and {}'.format(SECRET_FILE, PUBLIC_FILE))
     print('Keep {} safe and back it up. Hint: Use scrypt to encrypt the key.'.format(SECRET_FILE))
