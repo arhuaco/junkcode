@@ -13,7 +13,7 @@ def main():
     ''' Our main function. '''
 
     if os.path.isfile(SECRET_FILE):
-        print('It seems you have already initialized the system.')
+        print('It seems you have already created the keys.')
         return 1
 
     priv = bitcoin.encode_privkey(bitcoin.random_key(), 'wif')
@@ -30,7 +30,7 @@ def main():
 
     print('Generated {} and {}'.format(SECRET_FILE, PUBLIC_FILE))
     print('Keep {} safe and back it up. Hint: Use scrypt to encrypt the key.'.format(SECRET_FILE))
-    print('Send BTC to {}.\n'.format(PUBLIC_FILE))
+    print('Send BTC to {}'.format(address))
 
     return 0
 
