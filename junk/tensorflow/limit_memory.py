@@ -2,8 +2,14 @@
 # https://stackoverflow.com/questions/34199233/how-to-prevent-tensorflow-from-allocating-the-totality-of-a-gpu-memory
 # I haven't checked the easiest way to do this, I just want to keep the answer.
 # The API is experimental _today_ anyway.
+
+#    gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.333)
+#    tf.Session(config=tf.ConfigProto(gpu_options=gpu_options))
+
 def limit_memory():
     ' limit GPU memory '
+
+
     gpus = tf.config.experimental.list_physical_devices('GPU')
     if gpus:
       try:
