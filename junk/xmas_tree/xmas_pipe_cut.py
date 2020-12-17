@@ -3,28 +3,27 @@
 import sys
 import matplotlib.pyplot as plt
 
-MINIMUM_SEGMENT = 4 * 6 # 10cm branch is the minimum
+MINIMUM_SEGMENT = 5 # 10cm branch is the minimum
 
 def generate_tree(lines, level, base_size, factor, remaining):
     ' Compute material usage and dimensions '
-    if remaining <= MINIMUM_SEGMENT:
+    if base_size <= MINIMUM_SEGMENT:
         return 0
     needed_material = 4 * base_size
-    if remaining <= needed_material or needed_material == 0:
+    print(f'level{level+1}:{base_size:.2g}, total_level:{base_size*4:g}') # x4 branches
+    if remaining <= needed_material:
         return 0
-    print(f'level {level} needs {needed_material:g}, branch of {base_size}')
     lines.append([[-base_size, level], [base_size, level]])
     return 1 + generate_tree(lines,
                              level + 1,
                              base_size * factor,
                              factor,
                              remaining - needed_material)
-
 def main():
     ' duh '
 
     lines = []
-    height = generate_tree(lines=lines, level=0, base_size=25, factor=0.7, remaining=300)
+    height = generate_tree(lines=lines, level=0, base_size=25, factor=0.7445, remaining=600)
 
     plt.title('Tree')
     plt.xlabel('Width')
