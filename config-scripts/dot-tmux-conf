@@ -1,0 +1,12 @@
+# https://gist.github.com/raygunsix/3044075
+# https://dev.to/iggredible/useful-tmux-configuration-examples-k3g
+
+set -g mouse on
+
+set-option -wg automatic-rename off
+
+bind c new-window -c "#{pane_current_path}"
+
+bind r source-file ~/.tmux.conf \; display 'Reloaded!'
+
+set-option -g history-limit 20000
