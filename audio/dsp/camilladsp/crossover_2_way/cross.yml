@@ -1,0 +1,109 @@
+description: null
+devices:
+  adjust_period: null
+  capture:
+    channels: 2
+    device: hw:Loopback,1
+    format: S24LE
+    type: Alsa
+  capture_samplerate: null
+  chunksize: 4096
+  enable_rate_adjust: null
+  playback:
+    channels: 4
+    device: multicard2
+    format: S16LE
+    type: Alsa
+  queuelimit: null
+  rate_measure_interval: null
+  samplerate: 48000
+  silence_threshold: null
+  silence_timeout: null
+  stop_on_rate_change: null
+  target_level: null
+  volume_ramp_time: null
+filters:
+  highpass2k:
+    description: null
+    parameters:
+      freq: 300
+      q: 0.707
+      type: Highpass
+    type: Biquad
+  lowpass2k:
+    description: null
+    parameters:
+      freq: 300
+      q: 0.707
+      type: Lowpass
+    type: Biquad
+mixers:
+  to4chan:
+    channels:
+      in: 2
+      out: 4
+    description: null
+    mapping:
+    - dest: 0
+      mute: null
+      sources:
+      - channel: 0
+        gain: 0
+        inverted: false
+        mute: null
+        scale: null
+    - dest: 1
+      mute: null
+      sources:
+      - channel: 1
+        gain: 0
+        inverted: false
+        mute: null
+        scale: null
+    - dest: 2
+      mute: null
+      sources:
+      - channel: 0
+        gain: 0
+        inverted: false
+        mute: null
+        scale: null
+    - dest: 3
+      mute: null
+      sources:
+      - channel: 1
+        gain: 0
+        inverted: false
+        mute: null
+        scale: null
+pipeline:
+- bypassed: null
+  description: null
+  name: to4chan
+  type: Mixer
+- bypassed: null
+  channel: 0
+  description: null
+  names:
+  - highpass2k
+  type: Filter
+- bypassed: null
+  channel: 1
+  description: null
+  names:
+  - highpass2k
+  type: Filter
+- bypassed: null
+  channel: 2
+  description: null
+  names:
+  - lowpass2k
+  type: Filter
+- bypassed: null
+  channel: 3
+  description: null
+  names:
+  - lowpass2k
+  type: Filter
+processors: null
+title: null

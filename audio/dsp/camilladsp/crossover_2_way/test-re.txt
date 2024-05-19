@@ -1,0 +1,53 @@
+# cat /etc/alsa/conf.d/20-multicard.conf 
+pcm.multicard {
+        type multi;
+        slaves.a.pcm "hw:CARD=Pro,DEV=0";
+        slaves.a.channels 2;
+        slaves.b.pcm "hw:CARD=Pro,DEV=1";
+        slaves.b.channels 2;
+        bindings.0.slave a;
+        bindings.0.channel 0;
+        bindings.1.slave a;
+        bindings.1.channel 1;
+        bindings.2.slave b;
+        bindings.2.channel 0;
+        bindings.3.slave b;
+        bindings.3.channel 1;
+}
+ctl.multicard {
+        type hw;
+        card 20;
+}
+pcm.multicard2 {
+        type route;
+        slave.pcm "multicard";
+        slave.channels 4;
+        ttable.0.0 1;
+        ttable.1.1 1;
+        ttable.2.2 1;
+        ttable.3.3 1;
+}
+ctl.multicard2 {
+        type hw;
+        card 21;
+}
+
+
+aplay -v -D "hw:CARD=Pro,DEV=0"  /dev/zero --dump-hw-params
+
+ACCESS:  MMAP_INTERLEAVED RW_INTERLEAVED
+FORMAT:  S16_LE
+SUBFORMAT:  STD
+SAMPLE_BITS: 16
+FRAME_BITS: 32
+CHANNELS: 2
+RATE: [44100 48000]
+PERIOD_TIME: [1000 1000000]
+PERIOD_SIZE: [45 48000]
+PERIOD_BYTES: [180 192000]
+PERIODS: [2 1024]
+BUFFER_TIME: [1875 2000000]
+BUFFER_SIZE: [90 96000]
+BUFFER_BYTES: [360 384000]
+TICK_TIME: ALL
+

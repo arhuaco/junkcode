@@ -1,0 +1,3 @@
+sudo fuser -v /dev/snd/*
+pactl list cards
+pactl list sinks

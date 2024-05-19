@@ -1,0 +1,5 @@
+pw-cli list-objects Node
+pw-cli enum-params 123 Format
+pw-record --target 123 -q 15 --rate=48000 --format=s32 --channels=2 audio.wav
+
+pw-record --target 123 --rate=48000 --format=f32 --channels=2 /mnt/dos/anomalie_bleue.wav
