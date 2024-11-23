@@ -1,10 +1,13 @@
+" Quick script to dump references "
+
 import sys
 import sexpdata
 
 
-def recursive_find_symbol(tree: list) -> list[str]:
+def print_refs(tree: list) -> None:
+    "print all refs, also for children"
     if not isinstance(tree, list):
-        return tree
+        return
     if isinstance(tree[0], sexpdata.Symbol):
         if (
             len(tree) >= 2
@@ -12,15 +15,16 @@ def recursive_find_symbol(tree: list) -> list[str]:
             and str(tree[1]) == "Reference"
         ):
             reference = tree[2].strip()
-            if len(reference):
+            if reference:
                 print(reference)
     for exp in tree[1:]:
-        recursive_find_symbol(exp)
+        print_refs(exp)
 
 
 def main(file_name: str):
-    tree = sexpdata.loads(open(file_name).read())
-    recursive_find_symbol(tree)
+    "print all refs"
+    with open(file_name, encoding="utf-8") as in_f:
+        print_refs(sexpdata.loads(in_f.read()))
 
 
 if __name__ == "__main__":
