@@ -23,7 +23,7 @@ def read_peq_table_from_file(file_path):
                     }
                 )
             except ValueError as e:
-                print(f"Error parsing row {row}: {e}")
+                print(f"Error parsing row {row}: {e}", file=sys.stderr)
     return peq_table
 
 
