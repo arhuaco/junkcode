@@ -1,0 +1,11 @@
+[Unit]
+Description=EasyEffects inside Xvfb
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/easyeffects.sh start
+ExecStop=/usr/local/bin/easyeffects.sh stop
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
