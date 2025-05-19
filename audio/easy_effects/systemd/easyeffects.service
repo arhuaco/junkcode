@@ -3,8 +3,8 @@ Description=EasyEffects inside Xvfb
 
 [Service]
 Type=simple
-ExecStart=/usr/local/bin/easyeffects.sh start
-ExecStop=/usr/local/bin/easyeffects.sh stop
+ExecStart=/usr/local/bin/easyeffects.service.sh start
+ExecStop=/usr/local/bin/easyeffects.service.sh stop
 Restart=on-failure
 
 [Install]
