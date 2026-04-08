@@ -1,12 +1,19 @@
-# https://gist.github.com/raygunsix/3044075
-# https://dev.to/iggredible/useful-tmux-configuration-examples-k3g
+# ==========================================
+# ~/.tmux.conf
+# ==========================================
 
-set -g mouse on
-
+set -g mouse off
+set-option -g history-limit 20000
 set-option -wg automatic-rename off
 
+# Key Bindings
+# Open new windows in the current directory instead of the default user home
 bind c new-window -c "#{pane_current_path}"
+# Easy config reload: Press 'Prefix + r' to reload and show a message
+bind r source-file ~/.tmux.conf \; display 'Config Reloaded!'
 
-bind r source-file ~/.tmux.conf \; display 'Reloaded!'
-
-set-option -g history-limit 20000
+# Dim all inactive windows to a dark gray so they fade into the background
+setw -g window-status-style fg=colour240,bg=default
+# Clear the background for the active window and apply the dark green bracket style
+setw -g window-status-current-style bg=default
+setw -g window-status-current-format "#[fg=colour22,bold]【 #I:#W 】"
